@@ -1,34 +1,332 @@
 .container {
-    max-width: 100%;
-    height: auto;
-    margin: 5px;
-    padding: 5px 10px;
+  max-width: 100%;
+  height: auto;
+  margin: 5px;
+  padding: 5px 10px;
 }
+
 .re-arrow {
-    /* display: none; */
-    /* width: 0%; */
-    height: 2px;
-    background: white;
-    line-height: 0px;
-    font-size: 0px !important;
-    margin: 1px 12px 0px 8px;
-    transition: 0.3s;
+  /* display: none; */
+  /* width: 0%; */
+  height: 2px;
+  background: white;
+  line-height: 0px;
+  font-size: 0px !important;
+  margin: 1px 12px 0px 8px;
+  transition: 0.3s;
 }
+
 dropdown:hover {
-    .re-arrow {
-        background: #E03C31;
-    }
+  .re-arrow {
+    background: #E03C31;
+  }
 }
+
 .dropdown-toggle {
-    font-size: 15px;
+  font-size: 15px;
+  background-color: white;
+  color: black;
+  border: 0px;
 }
+
+.dropdown-menu {}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  transform: translateY(100%);
+}
+
 .btn-login {
-    border-radius: 10px;
-    margin: 0 10px;
-    font-size: 15px;
-    font-weight: 500;
+  border-radius: 10px;
+  margin: 0 10px;
+  font-size: 15px;
+  font-weight: 500;
 }
+
 .btn-login:hover {
-    background-color:#FAFAFA;
-    color: black;
+  background-color: #FAFAFA;
+  color: black;
+}
+
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0)
+  }
+
+  to {
+    -webkit-transform: scale(1)
+  }
+}
+
+@keyframes animatezoom {
+  from {
+    transform: scale(0)
+  }
+
+  to {
+    transform: scale(1)
+  }
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+
+  .cancelbtn {
+    width: 100%;
+  }
+}
+
+header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+  background-color: white;
+  width: 100%;
+}
+
+li.nav-item.dropdown {
+  list-style: none;
+}
+
+
+
+.btn-type {
+  /* padding: 5px;
+  border: solid black 1px;
+  align-items: center;
+  margin-top: 5px; */
+
+  padding: 10px 20px;
+  /* Điều chỉnh khoảng trắng bên trong nút */
+  border: 1px solid #333;
+  /* Đường viền nút */
+  background-color: white;
+  /* Màu nền nút */
+  color: #333;
+  /* Màu chữ nút */
+  cursor: pointer;
+}
+
+.btn-type:hover {
+  background-color: #f2f2f2;
+  /* Màu nền khi di chuột qua nút */
+  /* color: white; Màu chữ khi di chuột qua nút */
+  font-weight: 500;
+}
+
+.input-search {
+  display: flex;
+  border: 0px;
+  margin-left: 5px !important;
+  width: 90%;
+  background-color: rgba(0, 0, 0, 0);
+  /* Đỏ với alpha là 0.5 (50% trong suốt) */
+}
+
+.icon-search {
+  display: flex;
+  align-items: center;
+}
+
+:focus-visible {
+  outline: none;
+}
+
+.input-group {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 0;
+  margin: 15px 0px;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  /* Ngăn chặn xuống hàng */
+  overflow: hidden;
+  /*Ẩn nội dung vượt quá kích thước container */
+  text-overflow: ellipsis;
+  /* Hiển thị dấu '...' khi vượt quá kích thước container */
+}
+
+.lab-area {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  padding: 5px;
+}
+
+.sel-area {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 10px;
+  padding: 8px;
+  /* Thêm padding để tạo khoảng trắng xung quanh nội dung của select */
+  font-size: 16px;
+  /* Đặt kích thước chữ */
+  border: 1px solid #ccc;
+  /* Hiển thị đường viền */
+  cursor: pointer;
+  /* Biến đổi con trỏ thành bàn tay khi di chuyển qua select */
+}
+
+.sel-area:hover {
+  border-color: #888;
+}
+
+.sel-area:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.7);
+}
+
+.sel-area option {
+  background-color: #fff;
+  /* Màu nền của option */
+  color: #333;
+  /* Màu chữ của option */
+}
+
+/* Tùy chỉnh giao diện của option khi hover */
+.sel-area option:hover {
+  background-color: #f2f2f2;
+}
+
+/* Custom styles for the dropdown menu */
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+  /* Hiển thị dropdown menu khi hover vào menu cha */
+}
+
+
+.dropdown-menu {
+  background-color: #fff;
+  /* Màu nền của dropdown menu */
+  border: 1px solid #ccc;
+  /* Đường viền */
+}
+
+.dropdown-item {
+  color: #333;
+  /* Màu chữ của các mục dropdown */
+}
+
+.dropdown-item:hover {
+  background-color: #f2f2f2;
+  /* Màu nền khi hover vào mục dropdown */
+  color: #000;
+  /* Màu chữ khi hover vào mục dropdown */
+}
+
+.dropdown-menu:hover {
+  cursor: pointer;
+}
+.btn-noChoose {
+  height: 40px; 
+  margin: 5px;  
+  min-width: 100px;
+  border: 1px black solid;
+}
+.btn-choose {
+  height: 40px; 
+  margin: 5px;  
+  min-width: 100px;
+  border: 1px black solid;
+  background-color: #969696;
+  color: white;
+}
+.form-login {
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  flex-direction: unset;
+}
+
+.resizable-image {
+  object-fit:cover;
+  width: 100%;
+  /* Thiết lập chiều rộng của hình ảnh là 100% của phần tử chứa */
+  height: 100%;
+  /* max-width: 336px; */
+  position: relative;
+}
+
+.input-custom {
+  border: 0px;
+  margin-left: 5px;
+}
+
+.eye-btn {
+  background: rgba(0, 0, 0, 0);
+  border: 0;
+  padding: 0;
+}
+
+.fa {
+  color: #969696;
+}
+
+.fa:hover {
+  color: #969696 ! important;
+}
+
+.login-group {
+  border: 1px black solid;
+  width: 95%;
+  padding: 8px 15px;
+  border-radius: 10px;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.btn-log {
+  width: 95%;
+  padding: 8px;
+  border: 0px;
+  border-radius: 10px;
+  background-color: rgb(224, 60, 49);
+  color: white;
+}
+
+.btn-res {
+  margin-left: auto;
+  margin-right: 5%;
+  background: rgba(0, 0, 0, 0);
+  border: 0;
+  color: #E03C31;
+}
+.btn-x {
+  justify-content: right;
+  border: 0;
+  background: rgba(0, 0, 0, 0);
 }

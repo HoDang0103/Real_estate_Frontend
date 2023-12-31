@@ -1,0 +1,159 @@
+section {
+    margin-top: 150px;
+}
+
+/* CSS */
+.grid-container {
+    display: grid;
+    grid-template-columns: 60% 19.7% 19.7%;
+    grid-template-rows: 50% 50%;
+    grid-gap: 2px;
+    /* Khoảng cách giữa các ô */
+    height: 200px;
+    /* Độ cao của grid container, điều này có thể được điều chỉnh tùy thuộc vào nhu cầu của bạn */
+}
+
+.grid-item {
+    background-color: #ddd;
+    /* Màu nền tùy chỉnh */
+    object-fit: cover;
+    /* Thay đổi để fit, bạn cũng có thể sử dụng 'contain' hoặc các giá trị khác */
+    /* object-fit: contain; */
+    margin: 0px;
+    width: 100%;
+    /* Đảm bảo hình ảnh nằm hoàn toàn trong phần tử */
+    height: 100%;
+    /* Đảm bảo hình ảnh nằm hoàn toàn trong phần tử */
+}
+
+.item-1 {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.item-2 {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.item-3 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.item-4 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.property-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.property-item {
+    width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    color: #a3a3a3;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: 600;
+    padding-right: 15px;
+}
+
+.area {
+    font-size: 18px;
+    font-weight: 600;
+    padding-right: 15px;
+}
+
+.bedrooms,
+.wc,
+.anddress {
+    padding-right: 15px;
+    font-size: 18px;
+}
+
+.description-container {
+    max-height: 100px;
+    /* Đặt chiều cao tối đa bạn muốn hiển thị */
+    overflow: hidden;
+}
+
+.description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Hiển thị dấu "..." khi nội dung bị cắt */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* Số dòng tối đa bạn muốn hiển thị */
+    -webkit-box-orient: vertical;
+}
+
+.user-card {
+    display: flex;
+    align-items: center;
+}
+
+.avatar-container {
+    margin-right: 10px;
+    /* Khoảng cách giữa hình ảnh và thông tin người dùng */
+}
+
+.avatar {
+    width: 50px;
+    /* Điều chỉnh kích thước hình ảnh theo nhu cầu */
+    height: 50px;
+    border-radius: 50%;
+    /* Tạo hình tròn cho hình ảnh */
+    object-fit: cover;
+    /* Đảm bảo hình ảnh không bị méo khi hiển thị */
+    margin-bottom: 10px;
+}
+.card:hover {
+    cursor: pointer;
+}
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: bold;
+}
+
+.post-date {
+    color: gray;
+    font-size: 12px;
+}
+
+.phone-button {
+    background-color: #009ba1;
+    /* Màu xanh */
+    color: #fff;
+    /* Màu chữ trắng */
+    border: none;
+    padding: 6px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+}
+
+.phone-button i {
+    margin-right: 5px;
+    /* Khoảng cách giữa icon và số điện thoại */
+    
+}
+
+.phone-div {
+    align-items: end;
+}

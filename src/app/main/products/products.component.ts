@@ -1,43 +1,77 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
+import { ProductService } from 'src/app/services/product/product.service';
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  styleUrls: ['./products.component.css'],
+  providers: [DatePipe]  // Thêm DatePipe vào trường providers của component
 })
-export class ProductsComponent implements OnInit{
+
+export class ProductsComponent implements OnInit {
 
   productsArray: any[] = [];
-  categories: any[]= [];
+  categories: any[] = [];
   selectedCategory: number = 0;
   loggedObj: any = {};
 
-  constructor(private productSrv: ProductService) {
-    const localData = localStorage.getItem('amazon_user');
-    if(localData != null) {
-      const parseObj =  JSON.parse(localData);
+  title = 'pagination';
+  POSTS: any;
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 6;
+  test: string = '';
+
+  baseUrl = "https://localhost:7015/";
+
+  constructor(private productSrv: ProductService, private datePipe: DatePipe, private router: Router) {
+    const localData = localStorage.getItem('Story');
+    if (localData != null) {
+      const parseObj = JSON.parse(localData);
       this.loggedObj = parseObj;
     }
   }
+
 
   ngOnInit(): void {
     this.loadProducts();
     this.loadCategory();
   }
   loadProducts() {
-    this.productSrv.getAllProducts().subscribe((Res: any) =>{
-      this.productsArray = Res.data;
-    })
+    this.productSrv.getAllProducts().subscribe((Res: any) => {
+      this.productsArray = Res;
+      this.productsArray = this.productsArray.map(products => ({
+        ...products,
+        startDate: this.datePipe.transform(products.startDate, 'dd/MM/yyyy'),
+        user: {
+          ...products.user,
+          image: products.user.image !== null ? this.baseUrl + products.user.image : "/assets/images/avtDefault.jpg"
+
+        }
+      }))
+    });
+
   }
 
-  getAllProductsByCateogry(categoryId: number) {
-    // this.selectedCategory = categoryId;
-    // this.productSrv.getAllProductsByCateogry(categoryId).subscribe((Res: any) =>{
-    //   this.productsArray = Res.data;
-    // })
+  onTableDataChange(event: any): void {
+    this.page = event;
+    window.scrollTo({top :0});
+    this.loadProducts();
   }
-  
+
+  onTableSizeChange(event: any) {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.loadProducts();
+  }
+
+  redirectToProductDetail(productId: number) {
+    this.router.navigate(['/product-detail', productId]);
+  }
+
 
   loadCategory() {
     // this.productSrv.getAllCategory().subscribe((Res: any) =>{
@@ -66,7 +100,7 @@ export class ProductsComponent implements OnInit{
     //   }) 
     // }
     // debugger;
-    
+
   }
 
 

@@ -10,7 +10,13 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getAllProducts(): Observable<any[]> {
-    return this.http.get<any[]>("https://localhost:7015/api/Story/GetAllSaleStories?page=1&pageSize=10")
+    return this.http.get<any[]>("https://localhost:7015/api/Story/GetAllSaleStories?page=1&pageSize=1000")
+  }
+  getProduct(id: number): Observable<any[]> {
+    return this.http.get<any[]>("https://localhost:7015/api/Story/"+id)
   }
 
+  
+
 }
+
