@@ -1,0 +1,44 @@
+<div class="login-popup" *ngIf="showPopup">
+    <div class="login-popup-content">
+        <span class="close" (click)="closeLoginPopup()">&times;</span>
+        <h1>Đăng lại</h1>
+        <div class="card-row">
+            <div class="card-col-6">
+                <div class="title">Ngày bắt đầu</div>
+                <div class="input-start-day-group">
+                    <input autocomplete="off" type="date" [value]="currentDay">
+                </div>
+                <!-- <div type="primary" class="end-day-text">Kết thúc ngày {{endDate}}</div> -->
+            </div>
+
+        </div>
+
+        <div class="card-row">
+            <div class="card-col-6">
+                <div class="title">Gói</div>
+                <div id="input-custom">
+                    <select class="sel-area" id="districtSelect" (change)="toggleOptionPackage($event)" required>
+                        <option *ngFor="let package of packages; let i = index" [value]="package.name"
+                            style="padding: 8px;">
+                            {{ package.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-col-6">
+                <div class="title">Số ngày</div>
+                <div id="input-custom" *ngIf="packageSelect !== 'Free'">
+                    <select class="sel-area" id="districtSelect" (change)="toggleOptionNumberDay($event)">
+                        <option *ngFor="let number of numberDays; let i = index" [value]="number" style="padding: 8px;">
+                            {{ number }}
+                        </option>
+                    </select>
+                </div>
+                <div id="input-custom" *ngIf="packageSelect == 'Free'">
+                    <span>3</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
