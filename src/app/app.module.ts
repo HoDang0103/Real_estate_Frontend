@@ -12,6 +12,9 @@ import { ProductDetailComponent } from './main/product-detail/product-detail.com
 import { SuccessPopupComponent } from './main/success-popup/success-popup.component';
 import { AccountManagerComponent } from './main/account-manager/account-manager.component';
 import { SuccessComponent } from './main/success/success.component';
+import { ManagePostedComponent } from './main/manage-posted/manage-posted.component';
+import { PostItemComponent } from './main/manage-posted/post-item/post-item.component';
+import { PostInformationComponent } from './main/post-information/post-information.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +25,16 @@ import { SuccessComponent } from './main/success/success.component';
     SuccessPopupComponent,
     AccountManagerComponent,
     SuccessComponent,
+    ManagePostedComponent,
+    PostItemComponent,
+    PostInformationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

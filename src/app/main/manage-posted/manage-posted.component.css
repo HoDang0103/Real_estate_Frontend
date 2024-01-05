@@ -1,0 +1,34 @@
+.container {
+  margin-top: 180px;
+}
+
+.container .search:focus-visible {
+  border: none;
+}
+
+#tabs .tab-component {
+  height: 48px;
+  display: inline-block;
+  border-radius: 0px;
+  cursor: pointer;
+  white-space: nowrap;
+  width: fit-content;
+  background-color: rgb(255, 255, 255);
+  padding: 10px 16px 9px;
+  color: rgb(153, 153, 153);
+  opacity: 1;
+  border-top: 0px;
+  border-left: 0px;
+  border-image: initial;
+  border-right: none;
+  border-bottom: 1px solid rgb(242, 242, 242);
+}
+
+#tabs .nav-item .active {
+  color: rgb(44, 44, 44);
+  border-bottom: 2px solid rgb(224, 60, 49);
+}
+
+.my-tab-content {
+  padding: 8px 0px 8px;
+}

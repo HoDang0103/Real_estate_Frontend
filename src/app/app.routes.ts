@@ -1,4 +1,4 @@
-import { Input, NgModule } from "@angular/core";
+import { Component, Input, NgModule } from "@angular/core";
 import { NgModel } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 import { ProductsComponent } from "./main/products/products.component";
@@ -6,6 +6,8 @@ import { CheckoutComponent } from "./main/checkout/checkout.component";
 import { ProductDetailComponent } from "./main/product-detail/product-detail.component";
 import { AccountManagerComponent } from "./main/account-manager/account-manager.component";
 import { SuccessComponent } from "./main/success/success.component";
+import { ManagePostedComponent } from "./main/manage-posted/manage-posted.component";
+import { PostInformationComponent } from "./main/post-information/post-information.component";
 
 const routes: Routes = [
     {
@@ -26,6 +28,11 @@ const routes: Routes = [
     {
         path: 'success',component:SuccessComponent
     },
+        path: 'quan-ly-tin-rao-ban-cho-thue', component: ManagePostedComponent 
+    },
+    {
+        path: 'sua-tin', component: PostInformationComponent 
+    }
 ];
 
 @NgModule({
