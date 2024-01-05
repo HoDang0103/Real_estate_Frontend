@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
 
-  constructor() { }
-  private authToken: string | null = null;
+  private tokenSubject = new BehaviorSubject<string>("");
+  
+  private authToken: string | null;
+
+  constructor() {
+    this.authToken = localStorage.getItem('token'); 
+    if (this.authToken) {
+      this.tokenSubject.next(this.authToken);
+    }
+   }
   private user: any = {
     id: '',
     userName: '',
@@ -20,11 +29,15 @@ export class TokenService {
     promotion: 0,
   }
   setAuthToken(token: string): void {
+    localStorage.removeItem('token');
+    localStorage.setItem('token', token);
     this.authToken = token;
   }
 
-  getAuthToken(): string | null {
-    return this.authToken;
+  getAuthToken(): string |null {
+    const temp = this.authToken;
+     return temp;
+    // return "hihi";
   }
 
   setInfoUser(id: string, userName: string, password: string, email: string, phoneNumber: string, fullName: string, img: string, typeAccount: string
@@ -39,7 +52,6 @@ export class TokenService {
     this.user.typeAccount = typeAccount;
     this.user.surplus = surplus;
     this.user.promotion = promotion;
-    console.log(this.user);
   }
   getInfoUser() {
     return this.user;
