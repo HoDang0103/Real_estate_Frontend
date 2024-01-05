@@ -69,9 +69,7 @@ export class AccountManagerComponent {
   }
 
   resetPassword() {
-    this.accountSrv
-      .resetPassword(this.nowPass, this.newPass, this.reNewPass)
-      .subscribe({
+    this.accountSrv.resetPassword(this.nowPass, this.newPass, this.reNewPass).subscribe({
         next: (Res: any) => {
           this.popupMessage = 'Đổi mật khẩu thành công.';
           this.showSuccessMessage = true;
@@ -81,6 +79,7 @@ export class AccountManagerComponent {
           this.popupMessage = 'Đổi mật khẩu thất bại.';
           this.showSuccessMessage = true;
           this.isSuccess = false;
+          console.log(error);
         },
       });
   }

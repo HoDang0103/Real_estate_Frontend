@@ -51,7 +51,6 @@ export class ProductDetailComponent implements OnInit {
       }
       if(this.product.user.image !== null){
         this.imgLink = this.baseUrl + this.product.user.image;
-        console.log(this.imgLink);
       }else{
         this.imgLink = "../../../assets/images/postimgdefault.jpg";
       }

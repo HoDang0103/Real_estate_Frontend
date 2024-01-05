@@ -68,11 +68,17 @@ export class AccountService {
       newPassword: ne,
       confirmPassword: confirm,
     };
-    const url = 'https://localhost:7015/api/User/UpdateProfileUser';
+    const url = 'https://localhost:7015/api/User/ChangePassword';
     const headers = new HttpHeaders().set(
       'Authorization',
       'Bearer ' + this.token.getAuthToken()
     );
+    console.log(url, value,  headers );
     return this.http.put(url, value, { headers });
+  }
+
+  sentOTP(email: string): Observable<any> {
+    const url = 'https://localhost:7015/api/Email/SendOTP?userEmail='+email;
+    return this.http.post<any>(url,'');
   }
 }
