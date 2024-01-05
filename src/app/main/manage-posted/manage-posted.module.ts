@@ -4,7 +4,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule, Routes } from "@angular/router";
 import { Item1 } from './item/Item1';
 import { Item2 } from './item/Item2';
-import { AppComponent } from 'src/app/app.component';
 import { NgModule } from '@angular/core';
 import { PostItemComponent } from './post-item/post-item.component';
 
