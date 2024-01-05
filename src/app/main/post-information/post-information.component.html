@@ -1,6 +1,6 @@
 <div class="container">
 
-    <div class="card-item">
+    <div class="card-item" *ngIf="postId == 0">
         <h3 class="title">Thông tin cơ bản</h3>
 
         <div class="card-row">
@@ -124,7 +124,7 @@
         </div>
     </div>
 
-    <div class="card-item">
+    <div class="card-item" *ngIf="postId == 0">
         <h3 class="title">Thông tin bài viết</h3>
         <div class="card-row">
             <div class="card-col-12">
@@ -149,7 +149,7 @@
         </div>
     </div>
 
-    <div class="card-item">
+    <div class="card-item" *ngIf="postId == 0">
         <h3 class="title">Thông tin bất động sản</h3>
         <div class="card-row">
             <div class="card-col-12">
@@ -273,7 +273,7 @@
         </div>
     </div>
 
-    <div class="card-item">
+    <div class="card-item" *ngIf="postId == 0">
         <h3 class="title">Hình ảnh</h3>
         <div class="card-row">
             <div class="note-input-image">
@@ -312,7 +312,7 @@
 
     </div>
 
-    <div class="card-item">
+    <div class="card-item" *ngIf="postId == 0">
         <h3 class="title">Thông tin liên hệ</h3>
         <div class="card-row">
             <div class="card-col-6">

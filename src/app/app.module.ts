@@ -15,6 +15,7 @@ import { SuccessComponent } from './main/success/success.component';
 import { ManagePostedComponent } from './main/manage-posted/manage-posted.component';
 import { PostItemComponent } from './main/manage-posted/post-item/post-item.component';
 import { PostInformationComponent } from './main/post-information/post-information.component';
+import { PopupComponent } from './main/manage-posted/popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -27,16 +28,17 @@ import { PostInformationComponent } from './main/post-information/post-informati
     SuccessComponent,
     ManagePostedComponent,
     PostItemComponent,
-    PostInformationComponent
+    PostInformationComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

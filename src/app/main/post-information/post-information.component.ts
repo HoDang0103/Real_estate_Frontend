@@ -1,6 +1,7 @@
 import { SuccessPopupComponent } from './../success-popup/success-popup.component';
 import { identifierName } from '@angular/compiler';
 import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { addDays, format } from 'date-fns';
 import { ProductService } from 'src/app/services/product/product.service';
 import { ProvinceService } from 'src/app/services/province/province.service';
@@ -157,6 +158,8 @@ export class PostInformationComponent {
     userID: 'null',
   };
 
+  postUpdate: any = {};
+
   typeAaray: any[] = [
     {
       id: 1,
@@ -291,10 +294,13 @@ export class PostInformationComponent {
   isSuccess: boolean = true;
   packagedSelected: number = 0;
 
+  postId: number = 0;
+
   constructor(
     private provincesSvr: ProvinceService,
     private tokenSvr: TokenService,
-    private productSrv: ProductService
+    private productSrv: ProductService,
+    private route: ActivatedRoute
   ) {
     const localData = localStorage.getItem('province');
     if (localData != null) {
@@ -303,6 +309,13 @@ export class PostInformationComponent {
     }
   }
   ngOnInit(): void {
+    const productIdParam = this.route.snapshot.paramMap.get('postId');
+    this.postId = productIdParam !== null ? +productIdParam : 0;
+    console.log('id', this.postId);
+    if (this.postId) {
+      this.getData();
+    }
+
     this.packages[0].is;
     this.user = this.tokenSvr.getInfoUser();
     this.loadDistrict();
@@ -339,6 +352,18 @@ export class PostInformationComponent {
   loadWard(selectedDistrictId: any) {
     this.provincesSvr.getWards(selectedDistrictId).subscribe((Res: any) => {
       this.wardArray = Res.results;
+    });
+  }
+
+  getData() {
+    this.productSrv.getProduct(this.postId).subscribe({
+      next: (Res: any) => {
+        this.postUpdate = Res;
+        console.log(this.postUpdate);
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
     });
   }
 
@@ -492,28 +517,49 @@ export class PostInformationComponent {
   }
 
   postNew() {
-    // this.post.packageId = ,
-    this.post.needs = this.optionSelected;
-    this.post.document = this.paperSelected;
-    this.post.interior = this.furnitureSelected;
-    this.post.startDate = this.startDate;
-    this.post.imageFiles = this.selectedFiles;
-    this.post.packageId = this.packagedSelected;
+    if (this.postId == 0) {
+      // this.post.packageId = ,
+      this.post.needs = this.optionSelected;
+      this.post.document = this.paperSelected;
+      this.post.interior = this.furnitureSelected;
+      this.post.startDate = this.startDate;
+      this.post.imageFiles = this.selectedFiles;
+      this.post.packageId = this.packagedSelected;
 
-    console.log(this.post);
-    this.productSrv.createStory(this.post).subscribe({
-      next: (Res: any) => {
-        this.showSuccessMessage = true;
-        this.popupMessage = 'Đăng bài thành công';
-        this.isSuccess = true;
-        setTimeout(() => {
-          this.showSuccessMessage = false;
-        }, 3000); // 3 giâyFFDFG
-      },
-      error: (err: any) => {
-        console.log(err);
-      },
-    });
+      console.log(this.post);
+      this.productSrv.createStory(this.post).subscribe({
+        next: (Res: any) => {
+          this.showSuccessMessage = true;
+          this.popupMessage = 'Đăng bài thành công';
+          this.isSuccess = true;
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+          }, 3000); // 3 giâyFFDFG
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+      });
+    } else {
+      const data = {
+        packageID: this.packagedSelected,
+        startDate: this.startDate,
+      };
+
+      this.productSrv.repostStory(data, this.postId).subscribe({
+        next: (Res: any) => {
+          this.showSuccessMessage = true;
+          this.popupMessage = 'Đăng bài thành công';
+          this.isSuccess = true;
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+          }, 3000); // 3 giâyFFDFG
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+      });
+    }
   }
 
   handlePaperSelect(index: number) {

@@ -119,4 +119,13 @@ export class ProductService {
     console.log(data, url, formData, headers);
     return this.http.post(url, formData, { headers });
   }
+
+  repostStory(data: any, id: number): Observable<any> {
+    const url = 'https://localhost:7015/api/Story/Repost/' + id;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + this.token.getAuthToken()
+    );
+    return this.http.post(url, data, { headers });
+  }
 }
