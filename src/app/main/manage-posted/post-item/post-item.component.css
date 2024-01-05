@@ -1,5 +1,5 @@
 .post-item-container{
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex; justify-content: space-between; align-items: end;
     background-color: white;
     margin-top: 8px;
     padding: 8px;
@@ -90,6 +90,7 @@
     -webkit-box-align: center;
     align-items: center;
     padding: 22px 16px;
+    min-width: 146px;
 }
 
 .post-item-data-image .image-info{
@@ -98,6 +99,7 @@
     line-height: 16px;
     font-weight: 400;
     color: rgb(153, 153, 153);
+    margin-top: 5px;
 }
 
 .btn-again-post{
@@ -121,4 +123,14 @@
     width: 100%; 
     align-items: center; 
     height: 100%;
+}
+
+.description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Hiển thị dấu "..." khi nội dung bị cắt */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* Số dòng tối đa bạn muốn hiển thị */
+    -webkit-box-orient: vertical;
 }

@@ -66,8 +66,6 @@ export class AccountManagerComponent {
     if(this.user.img !== ""){
       this.imagePreview[0] = this.user.img;
     }
-    console.log(this.user);
-    console.log(this.imagePreview[0]);
   }
 
   resetPassword() {

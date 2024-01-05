@@ -1,16 +1,28 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { TokenService } from '../token/token.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.token.getAuthToken());
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient, private token: TokenService){
+    
+  } 
+ 
   getAllSaleProducts(): Observable<any[]> {
     return this.http.get<any[]>("https://localhost:7015/api/Story/GetAllSaleStories?page=1&pageSize=1000")
+  }
+
+  getAllStoryCurrentUser(): Observable<any[]> {
+    return this.http.get<any[]>("https://localhost:7015/api/Story/GetAllStoryCurrentUser", {headers:this.headers})
+  }
+
+  GetAllExpiredStoryCurrentUser(): Observable<any[]> {
+    return this.http.get<any[]>("https://localhost:7015/api/Story/GetAllExpiredStoryCurrentUser" , {headers:this.headers})
   }
 
   getAllRentProducts(): Observable<any[]> {

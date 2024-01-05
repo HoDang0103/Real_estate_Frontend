@@ -25,12 +25,14 @@
       
         <div class="tab-content my-tab-content">
           <div class="tab-pane" id="all" [ngClass]="{ 'active':activeTab==='all'}">
-            <li *ngFor="let item of items" style="list-style: none;">
-                <app-post-item [item]="item"></app-post-item>
+            <li *ngFor="let item of product" style="list-style: none;">
+                <app-post-item [item]="item" [isExist]="true"></app-post-item>
             </li>
           </div>
           <div class="tab-pane" id="expired" [ngClass]="{ 'active':activeTab==='expired'}">
-            <app-post-item></app-post-item>
+            <li *ngFor="let item of productOver" style="list-style: none;">
+              <app-post-item [item]="item" [isExist]="false"></app-post-item>
+            </li>
           </div>
         </div>
       
