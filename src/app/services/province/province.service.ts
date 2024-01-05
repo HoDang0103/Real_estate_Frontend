@@ -15,4 +15,8 @@ export class ProvinceService {
   getDistricts(): Observable<any[]> {
     return this.http.get<any[]>("https://vapi.vnappmob.com/api/province/district/79")
   }
+
+  getWards(district_id: any): Observable<any[]> {
+    return this.http.get<any[]>("https://vapi.vnappmob.com/api/province/ward/"+district_id)
+  }
 }

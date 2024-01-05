@@ -1,0 +1,550 @@
+<div class="container">
+
+    <div class="card-item">
+        <h3 class="title">Thông tin cơ bản</h3>
+
+        <div class="card-row">
+            <div class="card-col-6">
+                <div class="title-input" id="title-input">
+                    Tỉnh, thành phố
+                    <div class="input-require">&nbsp;*</div>
+                </div>
+                <div id="input-custom" class="input-text">
+                    <input id="province" name="province" placeholder="Chọn" type="text" mode="normal"
+                        value="Hồ Chí Minh" readonly>
+                </div>
+            </div>
+
+            <div class="card-col-6">
+                <div class="title-input" id="title-input">
+                    Quận, huyện
+                    <div class="input-require">&nbsp;*</div>
+                </div>
+                <div id="input-custom">
+                    <select class="sel-area" id="districtSelect" (change)="toggleOptionDistrict($event)" required>
+                        <option *ngFor="let district of districtArray; let i = index" [value]="i" style="padding: 8px;">
+                            {{ district.district_name }}
+                        </option>
+                    </select>
+                    <div class="icon-select">
+                        <svg font-size="16px" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path xmlns="http://www.w3.org/2000/svg" d="M4 9L12 17L20 9" stroke="currentColor"
+                                stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-row">
+            <div class="card-col-6">
+                <div class="title-input" id="title-input">
+                    Phường, xã
+                    <div class="input-require">&nbsp;*</div>
+                </div>
+                <div id="input-custom">
+                    <select class="sel-area" id="districtSelect" (change)="toggleOptionWard($event)" required>
+                        <option *ngFor="let ward of wardArray; let i = index" [value]="i">
+                            {{ ward.ward_name }}
+                        </option>
+                    </select>
+                    <div class="icon-select">
+                        <svg font-size="16px" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path xmlns="http://www.w3.org/2000/svg" d="M4 9L12 17L20 9" stroke="currentColor"
+                                stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-col-6">
+                <div class="title-input" id="title-input">
+                    Đường, phố
+                    <div class="input-require">&nbsp;*</div>
+                </div>
+                <div id="input-custom" class="input-text">
+                    <input id="province" name="province" placeholder="Nhập đường, phố" type="text" mode="normal"
+                        value="" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-row">
+            <div class="card-col-12">
+                <div class="title-input" id="title-input">Dự án</div>
+                <div id="input-custom" class="input-text">
+                    <input autocomplete="off" name="pgds-0.15299056666978816" placeholder="Nhập dự án" type="text"
+                        mode="normal" value="">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-item">
+        <h3 class="title">Thông tin bài viết</h3>
+        <div class="card-row">
+            <div class="card-col-12">
+                <div class="title-input" id="title-input">Tiêu đề
+                    <div class="input-require">&nbsp;*</div>
+                </div>
+                <textarea placeholder="VD: Bán nhà riêng 50m2 chính chủ tại Cầu Giấy" rows="2" type="text"
+                    class="input-textarea"></textarea>
+            </div>
+        </div>
+
+        <div class="card-row">
+            <div class="card-col-12">
+                <div class="title-input" id="title-input">Mô tả
+                    <div class="input-require">&nbsp;*</div>
+                </div>
+                <textarea
+                    placeholder="Nhập mô tả chung về bất động sản của bạn. Ví dụ: Khu nhà có vị trí thuận lợi, gần công viên, gần trường học ... "
+                    type="text" class="input-textarea resize"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-item">
+        <h3 class="title">Thông tin bất động sản</h3>
+        <div class="card-row">
+            <div class="card-col-12">
+                <div class="title-input" id="title-input">Diện tích
+                    <div class="input-require">&nbsp;*</div>
+                </div>
+                <div id="input-custom" class="input-text">
+                    <input autocomplete="off" name="pgds-0.9373195169927953" id="acreage"
+                        placeholder="Nhập diện tích, VD 80" mode="normal" type="text" value="" inputmode="numeric">
+                    <div class="area-unit">m²</div>
+                </div>
+            </div>
+        </div>
+        <div class="card-row">
+            <div class="card-col-8">
+                <div class="title-input" id="title-input">
+                    Mức giá
+                    <div class="input-require">&nbsp;*</div>
+                </div>
+                <div id="input-custom" class="input-text">
+                    <input autocomplete="off" placeholder="Nhập giá, VD 12000000" mode="normal" type="text" value=""
+                        inputmode="numeric">
+                </div>
+            </div>
+
+            <div class="card-col-4">
+                <div class="title-input" id="title-input">
+                    Đơn vị
+                    <div class="input-require">&nbsp;*</div>
+                </div>
+                <div id="input-custom">
+                    <select class="sel-area" id="districtSelect" (change)="toggleOptionUnit($event)" required>
+                        <option *ngFor="let unit of unitArray; let i = index" [value]="i" style="padding: 8px;">
+                            {{ unit.title }}
+                        </option>
+                    </select>
+                    <div class="icon-select">
+                        <svg font-size="16px" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path xmlns="http://www.w3.org/2000/svg" d="M4 9L12 17L20 9" stroke="currentColor"
+                                stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-item">
+        <h3 class="title">Hình ảnh &amp; Video</h3>
+        <div class="card-row">
+            <div class="note-input-image">
+                <span>• Đăng tối thiểu 4 ảnh thường
+                    với tin VIP</span>
+                <span>• Đăng tối đa 24 ảnh với tất cả
+                    các loại tin</span>
+                <span>• Hãy dùng ảnh thật, không trùng,
+                    không chèn SĐT</span>
+                <span>• Mỗi ảnh kích thước tối thiểu
+                    100x100 px, tối đa 15 MB</span>
+                <span>• Mô tả ảnh tối đa 45
+                    kí tự.</span>
+            </div>
+        </div>
+        <div tabindex="1">
+            <div class="input-image-group">
+                <!-- <svg width="80" height="80" viewBox="0 0 130 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M118.42 75.84C118.43 83.2392 116.894 90.5589 113.91 97.33H16.09C12.8944 90.0546 11.3622 82.1579 11.6049 74.2154C11.8477 66.2728 13.8593 58.4844 17.4932 51.4177C21.1271 44.3511 26.2918 38.1841 32.6109 33.3662C38.93 28.5483 46.2443 25.2008 54.0209 23.5676C61.7976 21.9345 69.8406 22.0568 77.564 23.9257C85.2873 25.7946 92.4965 29.363 98.6661 34.3709C104.836 39.3787 109.81 45.6999 113.228 52.8739C116.645 60.0478 118.419 67.8937 118.42 75.84Z"
+                        fill="#F2F2F2"></path>
+                    <path d="M5.54 97.33H126.37" stroke="#63666A" stroke-width="1" stroke-miterlimit="10"
+                        stroke-linecap="round"></path>
+                    <path
+                        d="M97 97.33H49.91V34.65C49.91 34.3848 50.0154 34.1305 50.2029 33.9429C50.3904 33.7554 50.6448 33.65 50.91 33.65H84.18C84.6167 33.6541 85.0483 33.7445 85.4499 33.9162C85.8515 34.0878 86.2152 34.3372 86.52 34.65L96.02 44.15C96.3321 44.4533 96.5811 44.8153 96.7527 45.2151C96.9243 45.615 97.0152 46.0449 97.02 46.48L97 97.33Z"
+                        fill="#D7D7D7" stroke="#63666A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                    <path
+                        d="M59.09 105.64H42.09C41.8248 105.64 41.5704 105.535 41.3829 105.347C41.1954 105.16 41.09 104.905 41.09 104.64V41.79C41.09 41.5248 41.1954 41.2705 41.3829 41.0829C41.5704 40.8954 41.8248 40.79 42.09 40.79H77.33L89 52.42V104.62C89 104.885 88.8946 105.14 88.7071 105.327C88.5196 105.515 88.2652 105.62 88 105.62H74.86"
+                        fill="white"></path>
+                    <path
+                        d="M59.09 105.64H42.09C41.8248 105.64 41.5704 105.535 41.3829 105.347C41.1954 105.16 41.09 104.905 41.09 104.64V41.79C41.09 41.5248 41.1954 41.2705 41.3829 41.0829C41.5704 40.8954 41.8248 40.79 42.09 40.79H77.33L89 52.42V104.62C89 104.885 88.8946 105.14 88.7071 105.327C88.5196 105.515 88.2652 105.62 88 105.62H74.86"
+                        stroke="#63666A" stroke-width="1" stroke-miterlimit="10" stroke-linecap="round">
+                    </path>
+                    <path d="M88.97 52.42H77.33V40.77L88.97 52.42Z" fill="#D7D7D7" stroke="#63666A" stroke-width="1"
+                        stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M27.32 65.49V70.6" stroke="#D7D7D7" stroke-width="1" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    <path d="M29.88 68.04H24.76" stroke="#D7D7D7" stroke-width="1" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    <path d="M110.49 32.5601V39.9901" stroke="#D7D7D7" stroke-width="1" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    <path d="M114.2 36.27H106.77" stroke="#D7D7D7" stroke-width="1" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    <path d="M34.07 14.58V25.59" stroke="#D7D7D7" stroke-width="1" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    <path d="M39.57 20.08H28.57" stroke="#D7D7D7" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    <path d="M67 115.86V67.12" stroke="#63666A" stroke-width="1" stroke-miterlimit="10"
+                        stroke-linecap="round"></path>
+                    <path d="M55.5 78.61L67 67.12L78.5 78.61" fill="white"></path>
+                    <path d="M55.5 78.61L67 67.12L78.5 78.61" stroke="#63666A" stroke-width="1" stroke-miterlimit="10">
+                    </path>
+                </svg> -->
+
+                <input type="file" multiple (change)="onFilesSelected($event)" #fileInput
+                    style="padding: 20px; border: 2px solid black; cursor: pointer;">
+
+                <div>Bấm để chọn ảnh cần tải lên</div>
+                <div>hoặc kéo thả ảnh
+                    vào đây</div>
+            </div>
+
+            <div class="image-grid" *ngIf="selectedFiles && selectedFiles.length">
+                <div class="image-item" *ngFor="let file of selectedFiles">
+                    <img [src]="getImageUrl(file)" alt="Preview" />
+                </div>
+            </div>
+
+        </div>
+
+        <!-- <div class="sc-cGOtXd cndPcv" style="width: 100%;
+                overflow: hidden;">
+            <div class="sc-cISvXG lajDJR" style="    display: grid;
+                    margin-left: -4px;
+                    margin-right: -4px;
+                    grid-template-columns: 33.33% 33.33% 33.33%;">
+                <div>
+                    <div class="sc-kUKgKq cTiGuw"
+                        style="margin-right: 4px; margin-left: 4px; margin-bottom: 16px; max-width: 100%;"><img
+                            src="https://file4.batdongsan.com.vn/temp/2024/01/03/20240103094659-a6bb.jpg" alt=""
+                            width="10" style="display: none;vertical-align: middle;
+                                    border-style: none;">
+                        <div class="sc-bmhdWt dmuYhT"
+                            style="width: 100%;
+                                padding-top: 56.25%;
+                                position: relative;
+                                border-radius: 2px;
+                                overflow: hidden;
+                                background: url(https://file4.batdongsan.com.vn/temp/2024/01/03/20240103094659-a6bb.jpg) center center / cover no-repeat white;">
+                            <div class="sc-dglpLo oRXxw" style="background: rgba(0, 0, 0, 0.4);
+                                    backdrop-filter: blur(64px);
+                                    width: 100%;
+                                    height: 100%;
+                                    top: 0px;
+                                    left: 0px;
+                                    position: absolute;
+                                    border-radius: 2px;
+                                    overflow: hidden;
+                                    -webkit-box-pack: center;
+                                    justify-content: center;
+                                    -webkit-box-align: center;
+                                    align-items: center;
+                                    display: flex;
+                                    cursor: pointer;"><img
+                                    src="https://file4.batdongsan.com.vn/temp/2024/01/03/20240103094659-a6bb.jpg"
+                                    scale="1" class="sc-iJvxkS bMPQLX" style="height: 100%; width: auto;vertical-align: middle;
+                                            border-style: none;display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    user-select: none;
+    height: 100%;
+    transform: rotate(0deg) scale(1);
+    width: 100%;
+    object-fit: cover;
+    vertical-align: middle;
+    border-style: none;">
+                                <div class="sc-dIPCZe knpPbR" style="user-select: none;
+                                        z-index: 1;
+                                        position: absolute;
+                                        width: 100%;
+                                        height: 100%;"></div>
+                            </div>
+                            <div class="sc-UWGlQ gFYEEE" style="    position: absolute;
+                                    top: 4px;
+                                    right: 4px;
+                                    display: flex;
+                                    -webkit-box-pack: center;
+                                    justify-content: center;
+                                    -webkit-box-align: center;
+                                    align-items: center;">
+                                <button class="sc-hOqqkJ kTuRVP sc-bPRJTr dsaAGO" type="border" color="secondary" style="width: 24px;
+                                            height: 24px;
+                                            z-index: 1;
+                                            border-radius: 50%;
+                                            position: relative;
+                                            padding: 0px;
+                                            cursor: pointer;
+                                            position: relative;
+    height: 32px;
+    display: inline-block;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+    width: fit-content;
+    letter-spacing: -0.2px;
+    background-color: rgb(255, 255, 255);
+    padding: 8px 7px;
+    color: rgb(44, 44, 44);
+    opacity: 1;
+    border: 1px solid rgb(204, 204, 204);
+    -webkit-appearance: button;
+    text-transform: none;
+    overflow: visible;
+    margin: 0;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: inherit;
+    touch-action: manipulation;">
+                                    <span class="sc-dacFzL bsbCFl" style="color: rgb(44, 44, 44);
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    line-height: 1;">
+                                        <div class="sc-jQbIHB gTZZqe" style="display: flex;
+                                                -webkit-box-align: center;
+                                                align-items: center;
+                                                height: 100%;
+                                                width: 100%;"><svg font-size="16px" width="1em" height="1em"
+                                                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                                style="    width: 14px;
+                                                        height: 14px; overflow: hidden;">
+                                                <path d="M19 5L5 19" stroke="currentColor" stroke-width="1.9"
+                                                    stroke-miterlimit="10" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                                <path d="M19 19L5 5" stroke="currentColor" stroke-width="1.9"
+                                                    stroke-miterlimit="10" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                            </svg></div>
+                                    </span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div> -->
+
+    </div>
+
+    <div class="card-item">
+        <h3 class="title">Thông tin liên hệ</h3>
+        <div class="card-row">
+            <div class="card-col-6">
+                <div class="title-input" id="title-input">Tên liên hệ
+                    <div class="input-require">&nbsp;*</div>
+                </div>
+                <div id="input-custom" class="input-text">
+                    <input autocomplete="off" name="pgds-0.341423656855224" maxlength="200" placeholder="Nhập tên">
+                </div>
+            </div>
+
+            <div class="card-col-6">
+                <div class="title-input" id="title-input">Số diện thoại
+                    <div class="input-require">&nbsp;*</div>
+                </div>
+                <div id="input-custom" class="input-text">
+                    <input autocomplete="off" name="pgds-0.341423656855224" maxlength="200"
+                        placeholder="Nhập số diện thoại">
+                </div>
+            </div>
+        </div>
+
+        <div class="card-row">
+            <div class="card-col-6">
+                <div class="title-input" id="title-input">Email
+                </div>
+                <div id="input-custom" class="input-text">
+                    <input autocomplete="off" name="pgds-0.341423656855224" maxlength="200" placeholder="Nhập email">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-item">
+        <h3 class="title">Cấu hình tin đăng</h3>
+
+        <div class="card-row">
+            <div class="card-col-12">
+                <h6>Chọn loại tin đăng</h6>
+                <div class="type-group">
+                    <div class="type-item-container" *ngFor="let type of factDataPostType; let i = index"
+                        [ngClass]="{'active': typeSelectId == type.id}" (click)="handleChooseType(i)">
+                        <div class="item-type-info-container">
+                            <h5 type="primary" id="type-title"
+                                [ngClass]="{'bronze': type.id == 2,'silver': type.id==3, 'gold': type.id==4, 'diamond':type.id==5}">
+                                {{type.name}}</h5>
+                            <div class="type-price-container">
+                                Từ&nbsp;
+                                <span>{{type.pricePerDay | number: '1.3-3'}}</span>
+                                &nbsp;đ/ngày
+                            </div>
+                        </div>
+                        <button class="btn-choose-type">
+                            <div class="btn-title">
+                                <span *ngIf="typeSelectId !== type.id">Chọn</span>
+                                <span *ngIf="typeSelectId == type.id">Đã chọn</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-row">
+            <div class="card-col-12">
+                <h6>Chọn thời gian đăng tin</h6>
+                <div style="margin-top: 8px;" id="number-day">
+                    <div class="title">
+                        Số ngày đăng
+                    </div>
+                    <div class="group-number-day" *ngIf="typeSelectId !== 1">
+                        <div class="number-day-item" *ngFor="let numberDay of numberDays; let i = index"
+                            (click)="handleChooseNumber(numberDay)" [ngClass]="{'active': numberSelected == numberDay}">
+                            <div>
+                                <div class="number-day">{{numberDay}} ngày</div>
+                                <div class="price">Tông tiền {{priceWithNumberDays[i] | number: '1.3-3'}} đ</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-number-day" *ngIf="typeSelectId == 1">
+                        <div class="number-day-item active">
+                            <div>
+                                <div class="number-day">{{numberSelected}} ngày</div>
+                                <div class="price">Tông tiền 0 đ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-row">
+                    <div class="card-col-4" id="start-day-container">
+                        <div class="title">Ngày bắt đầu</div>
+                        <div class="input-start-day-group">
+                            <input autocomplete="off" [value]="currentDay" (change)="onStartDateChange($event)"
+                                type="date">
+                        </div>
+                        <div type="primary" class="end-day-text">Kết thúc ngày {{endDate}}</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-item">
+        <h3 class="title">Thanh toán</h3>
+        <div class="payment-container">
+            <div class="payment-detail-container">
+                <div class="item">
+                    <div class="item-title">Loại tin</div>
+                    <div class="item-value">{{typePostResult}}</div>
+                </div>
+
+                <div class="item">
+                    <div class="item-title">Đơn giá / ngày</div>
+                    <div class="item-value">{{pricePerDayResult | number: '1.3-3'}} đ</div>
+                </div>
+
+                <div>
+                    <div class="item">
+                        <div class="item-title">Thời gian đăng tin</div>
+                        <div class="item-value">{{numberDayResult}} ngày</div>
+                    </div>
+                    <div class="duration">{{formatDate(startDate)}} → {{endDate}}</div>
+                </div>
+            </div>
+
+            <div class="sc-dGPzrD dkeChL" style="padding: 16px 0px;">
+                <div class="sc-kkQtUC bUVLpc" style="width: 100%;
+                height: 1px;
+                background-color: rgb(242, 242, 242);
+                margin-bottom: 0px;"></div>
+            </div>
+
+            <div class="payment-result-container">
+                <div class="item">
+                    <div class="item-title">Tổng tiền</div>
+                    <h3>{{totalCost | number: '1.3-3'}}<span> đ</span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="nav-container-class-1">
+        <div class="nav-container-class-2">
+            <div class="nav-container-class-3">
+                <div style="display: flex;">
+                    <button class="btn-back">
+                        <div class="content">
+                            <span class="icon-back">
+                                <div>
+                                    <svg font-size="24px" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path xmlns="http://www.w3.org/2000/svg" d="M15 4L7 12L15 20"
+                                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </span>
+                            <span class="title">Quay lại</span>
+                        </div>
+                    </button>
+                </div>
+                <div style="display: flex;">
+                    <div class="total-cost-container">
+                        <div class="title">Tổng tiền</div>
+                        <div class="total-cost-group">
+                            <h4>{{totalCost | number: '1.3-3'}}</h4>
+                            <h6>đ</h6>
+                        </div>
+                    </div>
+                    <button class="btn-save">
+                        <div class="content">
+                            <span class="title">Lưu thay đổi</span>
+                            <span class="icon-container">
+                                <div>
+                                    <svg font-size="16px" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path xmlns="http://www.w3.org/2000/svg" d="M9 20L17 12L9 4"
+                                            stroke="currentColor" stroke-width="1.9" stroke-linecap="round"
+                                            stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

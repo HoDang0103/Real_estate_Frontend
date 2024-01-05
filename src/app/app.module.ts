@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductDetailComponent } from './main/product-detail/product-detail.component';
+import { ManagePostedComponent } from './main/manage-posted/manage-posted.component';
+import { PostItemComponent } from './main/manage-posted/post-item/post-item.component';
+import { PostInformationComponent } from './main/post-information/post-information.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +19,16 @@ import { ProductDetailComponent } from './main/product-detail/product-detail.com
     ProductsComponent,
     CheckoutComponent,
     ProductDetailComponent,
+    ManagePostedComponent,
+    PostItemComponent,
+    PostInformationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
