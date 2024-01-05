@@ -6,15 +6,13 @@ import { TokenService } from 'src/app/services/token/token.service';
 @Component({
   selector: 'app-account-manager',
   templateUrl: './account-manager.component.html',
-  styleUrls: ['./account-manager.component.css']
+  styleUrls: ['./account-manager.component.css'],
 })
 export class AccountManagerComponent {
-
   @ViewChild('fileInput') fileInput!: ElementRef;
 
-
   activeTab = 'search';
-  selectedFile: File | null = null;
+  selectedFiles: File[] = [];
   imagePreview: string[] = [];
   user: any = {};
   nowPass: string = '';
@@ -27,8 +25,11 @@ export class AccountManagerComponent {
   popupMessage: string = '';
   isSuccess: boolean = true;
 
-  constructor(private http: HttpClient, private token: TokenService,
-    private accountSrv: AccountService) { }
+  constructor(
+    private http: HttpClient,
+    private token: TokenService,
+    private accountSrv: AccountService
+  ) {}
 
   search(activeTab: any) {
     this.activeTab = activeTab;
@@ -60,92 +61,89 @@ export class AccountManagerComponent {
   }
 
   ngOnInit(): void {
-
     this.user = this.token.getInfoUser();
     console.log(this.user);
-    if(this.user.img !== ""){
+    if (this.user.img !== '') {
       this.imagePreview[0] = this.user.img;
     }
   }
 
   resetPassword() {
-    this.accountSrv.resetPassword(this.nowPass, this.newPass, this.reNewPass).subscribe({
-      next: (Res:any) => {
-        this.popupMessage='Đổi mật khẩu thành công.'
-        this.showSuccessMessage = true;
-        this.isSuccess = true;
-      },
-      error: (error: any) => {
-        this.popupMessage='Đổi mật khẩu thất bại.'
-        this.showSuccessMessage = true;
-        this.isSuccess = false;
-      } 
-    })
+    this.accountSrv
+      .resetPassword(this.nowPass, this.newPass, this.reNewPass)
+      .subscribe({
+        next: (Res: any) => {
+          this.popupMessage = 'Đổi mật khẩu thành công.';
+          this.showSuccessMessage = true;
+          this.isSuccess = true;
+        },
+        error: (error: any) => {
+          this.popupMessage = 'Đổi mật khẩu thất bại.';
+          this.showSuccessMessage = true;
+          this.isSuccess = false;
+        },
+      });
   }
 
   upDateUser() {
+    this.accountSrv
+      .upDateProUser({
+        fullName: this.user.fullName,
+        phoneNumber: this.user.phoneNumber,
+        image: this.selectedFiles[0],
+      })
+      .subscribe({
+        next: (Res: any) => {
+          this.showSuccessMessage = true;
+          this.popupMessage = 'Cập nhật thành công.';
+          this.isSuccess = true;
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+          }, 3000); // 3 giây
+          console.log('2');
+        },
+        error: (error: any) => {
+          this.showSuccessMessage = true;
+          this.popupMessage = 'Cập nhật thất bại.';
+          this.isSuccess = false;
+          console.log('1');
 
-     let imge: File ; 
-
-    if (this.selectedFile) {
-      imge = this.selectedFile;
-    }
-
-    this.accountSrv.upDateProUser({
-      fullName: this.user.fullName,
-      phoneNumber: this.user.phoneNumber,
-      // image: imge
-    }).subscribe({
-      next: (Res: any) => {
-        this.showSuccessMessage = true;
-        this.popupMessage = 'Cập nhật thành công.'
-        this.isSuccess = true;
-        setTimeout(() => {
-          this.showSuccessMessage = false;
-        }, 3000); // 3 giây
-        console.log('2');
-      },
-      error: (error: any) => {
-        this.showSuccessMessage = true;
-        this.popupMessage = 'Cập nhật thất bại.'
-        this.isSuccess = false;
-        console.log('1');
-
-        setTimeout(() => {
-          this.showSuccessMessage = false;
-        }, 3000); // 3 giâyFFDFG
-        console.log(error);
-      }
-    })
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+          }, 3000); // 3 giâyFFDFG
+          console.log(error);
+        },
+      });
   }
-
 
   onFileSelected(event: any): void {
     const files: FileList = event.target.files;
-    this.selectedFile = files[0];
+    this.selectedFiles[0] = files[0];
 
     // Xem trước hình ảnh
 
-    if (this.selectedFile) {
+    if (this.selectedFiles.length > 0) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.imagePreview[0] = e.target.result;
       };
-      reader.readAsDataURL(this.selectedFile);
+      reader.readAsDataURL(this.selectedFiles[0]);
     }
   }
 
   onUpload(): void {
-    if (this.selectedFile) {
+    if (this.selectedFiles.length > 0) {
       const formData = new FormData();
-      formData.append('file', this.selectedFile);
+      formData.append('file', this.selectedFiles[0]);
 
-      this.http.post('your-api-endpoint', formData)
-        .subscribe(response => {
+      this.http.post('your-api-endpoint', formData).subscribe(
+        (response) => {
           console.log('Upload successful:', response);
-        }, error => {
+        },
+        (error) => {
           console.error('Error uploading file:', error);
-        });
+        }
+      );
     }
   }
   topUp() {
@@ -153,10 +151,8 @@ export class AccountManagerComponent {
       next: (Res: any) => {
         window.open(Res.paypalUrl, '_self');
       },
-      error: (error: any) => {
-
-      }
-    })
+      error: (error: any) => {},
+    });
   }
 
   showTopup() {

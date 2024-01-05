@@ -6,6 +6,23 @@
         <div class="card-row">
             <div class="card-col-12">
                 <div class="title-input" id="title-input">
+                    Nhu cầu
+                    <div class="input-require">&nbsp;*</div>
+                </div>
+                <div style="display: flex; max-width: 50%; justify-content: space-between;">
+                    <label *ngFor="let option of options" [class.checked]="selectedOption === option.value">
+                        <input type="radio" name="radioOption" [value]="option.value" [(ngModel)]="selectedOption"
+                            (change)="onRadioChange(option.value)">
+                        <span class="custom-radio"></span>
+                        {{ option.label }}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-row">
+            <div class="card-col-12">
+                <div class="title-input" id="title-input">
                     Loại bất động sản
                     <div class="input-require">&nbsp;*</div>
                 </div>
@@ -179,6 +196,81 @@
                 </div>
             </div>
         </div>
+
+        <div class="card-row" *ngIf="optionSelected">
+            <div class="card-col-6">
+                <div class="title-input" id="title-input">Giấy tờ pháp lý</div>
+                <div class="sc-ivZKlt kbVaPe">
+                    <div class="sc-exiMuG daagyf" *ngFor="let p of paper; let i = index" (click)="handlePaperSelect(i)">
+                        <div mode="tag" class="sc-hYAvag sc-cdijYi jijUtu"
+                            [ngClass]="{'jPJYPD': paperSelected !== p.code, 'fhIMm': paperSelected == p.code}">
+                            <span color="#2C2C2C" class="sc-fodVxV sUpQc sc-eishCr cCZPVr"
+                                type="primary">{{p.name}}</span>
+                            <div class="sc-kQTreH drFvYN" *ngIf="paperSelected == p.code">
+                                <svg font-size="16px" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19 7L9.20003 18L5 13.2857" stroke="currentColor" stroke-width="1.9"
+                                        stroke-linejoin="round" stroke-linecap="round"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-row">
+            <div class="card-col-6">
+                <div class="title-input" id="title-input">Nội thất</div>
+                <div class="sc-ivZKlt kbVaPe">
+                    <div class="sc-exiMuG daagyf" *ngFor="let f of furniture; let i = index"
+                        (click)="handleFurnitureSelect(i)">
+                        <div class="sc-hYAvag sc-cdijYi jijUtu"
+                            [ngClass]="{'jPJYPD': furnitureSelected !== f.code, 'fhIMm': furnitureSelected == f.code}">
+                            <span class="sc-fodVxV sUpQc sc-eishCr cCZPVr" type="primary">{{f.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-row">
+            <div style="width: 100%;
+            padding-right: 4px;
+            display: flex;
+            /* flex-direction: column; */
+            justify-content: space-between;">
+                <div class="title-input" id="title-input">Số phòng ngủ</div>
+                <div class="sc-kJFuea iwdYMG">
+
+                    <div class="sc-bGqQkm jyZRYv sc-clhSjD cviqID">
+                        <div class="sc-ihnbgO dWVYgZ">
+                            <input min="0" autocomplete="off" name="pgds-185756381" mode="normal"
+                                [(ngModel)]="post.bedrooms" class="sc-cjHJEj blvXSp" type="number" value="0"
+                                inputmode="numeric">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-row">
+            <div style="width: 100%;
+            padding-right: 4px;
+            display: flex;
+            /* flex-direction: column; */
+            justify-content: space-between;">
+                <div class="title-input" id="title-input">Số phòng tắm, nhà vệ sinh</div>
+                <div class="sc-kJFuea iwdYMG">
+
+                    <div class="sc-bGqQkm jyZRYv sc-clhSjD cviqID">
+                        <div class="sc-ihnbgO dWVYgZ">
+                            <input min="0" autocomplete="off" name="pgds-0.62756381" mode="normal" [(ngModel)]="post.wc"
+                                class="sc-cjHJEj blvXSp" type="number" value="0" inputmode="numeric">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="card-item">
@@ -199,7 +291,7 @@
         </div>
         <div tabindex="1">
             <div class="input-image-group">
-                                
+
                 <input type="file" multiple (change)="onFilesSelected($event)" #fileInput
                     style="padding: 20px; border: 2px solid black; cursor: pointer;">
 
@@ -216,7 +308,7 @@
 
         </div>
 
-        
+
 
     </div>
 
@@ -228,7 +320,7 @@
                     <div class="input-require">&nbsp;*</div>
                 </div>
                 <div id="input-custom" class="input-text">
-                    <input autocomplete="off" disabled="true" [value]="user.fullName" maxlength="200" >
+                    <input autocomplete="off" disabled="true" [value]="user.fullName" maxlength="200">
                 </div>
             </div>
 
@@ -237,8 +329,8 @@
                     <div class="input-require">&nbsp;*</div>
                 </div>
                 <div id="input-custom" class="input-text">
-                    <input autocomplete="off" name="pgds-0.3424" maxlength="200"
-                        disabled="true" [value]="user.phoneNumber">
+                    <input autocomplete="off" name="pgds-0.3424" maxlength="200" disabled="true"
+                        [value]="user.phoneNumber">
                 </div>
             </div>
         </div>
@@ -248,7 +340,8 @@
                 <div class="title-input" id="title-input">Email
                 </div>
                 <div id="input-custom" class="input-text">
-                    <input autocomplete="off" name="pgd1423656855224" maxlength="200" disabled="true" [value]="user.email">
+                    <input autocomplete="off" name="pgd1423656855224" maxlength="200" disabled="true"
+                        [value]="user.email">
                 </div>
             </div>
         </div>
@@ -392,7 +485,7 @@
                             <h6>đ</h6>
                         </div>
                     </div>
-                    <button class="btn-save">
+                    <button class="btn-save" (click)="postNew()">
                         <div class="content">
                             <span class="title">Lưu thay đổi</span>
                             <span class="icon-container">

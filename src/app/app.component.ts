@@ -99,8 +99,8 @@ export class AppComponent {
     // }
 
     const account = {
-      "username": 'hungtest',
-      "password": 'Abcd1234!'
+      "username": 'hungtest2',
+      "password": 'Abcd!1234'
     }
 
     this.accountSrv.postLogin(account).subscribe({
@@ -110,9 +110,10 @@ export class AppComponent {
         this.user.id = res.userId;
         this.tokenSrv.setAuthToken(res.token);
         this.loadInfoUser();
-        error: (error: any) => {
-          this.errorMessage = 'Tên đăng nhập hoặc mật khẩu không đúng.'
-        }
+      },
+      error: (error: any) => {
+        this.errorMessage = 'Tên đăng nhập hoặc mật khẩu không đúng.'
+        console.log(error);
       }
     })
     console.log(this.user);
