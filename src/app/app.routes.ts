@@ -28,10 +28,11 @@ const routes: Routes = [
     {
         path: 'success',component:SuccessComponent
     },
-        path: 'quan-ly-tin-rao-ban-cho-thue', component: ManagePostedComponent 
+    {
+        path: 'manage-posted', component: ManagePostedComponent
     },
     {
-        path: 'sua-tin', component: PostInformationComponent 
+        path: 'post-information-detail', component: PostInformationComponent
     }
 ];
 

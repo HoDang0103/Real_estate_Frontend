@@ -17,7 +17,6 @@ const appRoutes: Routes = [
   
   @NgModule({
     imports:      [ BrowserModule, FormsModule],
-    declarations: [ ManagePostedComponent, PostItemComponent ],
     bootstrap:    [ ManagePostedComponent ]
   })
   export class ManageModule { }
