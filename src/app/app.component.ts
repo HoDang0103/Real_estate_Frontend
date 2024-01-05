@@ -51,7 +51,10 @@ export class AppComponent {
   passwordType: string = 'password';
   checkPasswordType: string = 'password';
   isSuccess = true;
-
+  isOTP: boolean = false;
+  emailOtp: string = '';
+  passOtp: string = '';
+  otp: string = '';
 
 
   constructor(private router: Router, private accountSrv: AccountService,
@@ -85,6 +88,29 @@ export class AppComponent {
   setForgotPassword() {
     this.forgotPassword = !this.forgotPassword;
     this.register = false;
+    this.isOTP = false;
+    this.emailOtp = '';
+    this.passOtp = '';
+    this.otp = '';
+  }
+
+  showOTP() {
+    this.accountSrv.sentOTP(encodeURIComponent(this.emailOtp)).subscribe({
+      next: (Res: any) => {
+        this.isOTP = !this.isOTP;
+      },
+      error: (err: any) => {
+        console.log(err);
+      }
+    })
+  }
+
+  getOTP() {
+
+  }
+
+  confirmOTP() {
+
   }
 
   showRegister() {
@@ -93,15 +119,11 @@ export class AppComponent {
   }
 
   onLogin() {
-    // const account = {
-    //   "username": this.user.userName,
-    //   "password": this.user.password
-    // }
-
     const account = {
-      "username": 'hungtest2',
-      "password": 'Abcd!1234'
+      "username": this.user.userName,
+      "password": this.user.password
     }
+
 
     this.accountSrv.postLogin(account).subscribe({
       next: (res: any) => {
@@ -136,9 +158,9 @@ export class AppComponent {
       this.user.email = Res.email;
       this.user.phoneNumber = Res.phoneNumber;
       this.tokenSrv.setInfoUser(this.user.id, this.user.userName, this.user.password, this.user.email, this.user.phoneNumber, this.user.fullName
-        ,this.user.img,this.user.typeAccount,this.user.surplus,this.user.promotion);
+        , this.user.img, this.user.typeAccount, this.user.surplus, this.user.promotion);
     });
-    
+
 
   }
 
