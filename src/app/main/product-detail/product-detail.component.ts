@@ -17,6 +17,9 @@ export class ProductDetailComponent implements OnInit {
   productId: number = 0;
   selectedIndex: number = 0;
   indicators = true;
+  userName! : string;
+  imgLink!:string;
+  phoneNumber!: string;
 
   baseUrl = "https://localhost:7015/";
   constructor(private productSrv: ProductService, private datePipe: DatePipe, private route: ActivatedRoute) {
@@ -31,6 +34,7 @@ export class ProductDetailComponent implements OnInit {
     this.productId = productIdParam !== null ? +productIdParam : 0;
 
     this.loadProducts();
+    
 
   }
   loadProducts() {
@@ -39,6 +43,23 @@ export class ProductDetailComponent implements OnInit {
       this.product.startDate = this.datePipe.transform(this.product.startDate, 'dd/MM/yyyy');
       this.product.endDate = this.datePipe.transform(this.product.endDate, 'dd/MM/yyyy');
       console.log(this.product);
+
+      if(this.product.user.fullName !== null){
+        this.userName = this.product.user.fullName;
+      }else{
+        this.userName = "ADMIN";
+      }
+      if(this.product.user.image !== null){
+        this.imgLink = this.baseUrl + this.product.user.image;
+        console.log(this.imgLink);
+      }else{
+        this.imgLink = "../../../assets/images/postimgdefault.jpg";
+      }
+      if(this.product.user.phoneNumber !== null){
+        this.phoneNumber = this.product.user.phoneNumber;
+      }else{
+        this.phoneNumber = "Không có số";
+      }
     })
   }
   selectImage(index: number) {

@@ -1,96 +1,116 @@
 <div class="carousel-container">
-    <img *ngFor="let image of product.images ; let i = index" [src]="baseUrl+image.imageLink" alt=""
-        [ngClass]="{'image-active': selectedIndex === i}">
+    <div>
+        <img *ngFor="let image of product.images ; let i = index" [src]="baseUrl+image.imageLink" alt=""
+            [ngClass]="{'image-active': selectedIndex === i}">
 
-    <div *ngIf="indicators" class="carousel-miniImage-container" style="display: flex;">
-        <img *ngFor="let miniImage of product.images; let i = index" class="miniImage"
-            [src]="baseUrl + miniImage.imageLink" [ngClass]="{'active': selectedIndex === i}" (click)="selectImage(i)">
-    </div>
+        <div *ngIf="indicators" class="carousel-miniImage-container" style="display: flex;">
+            <img *ngFor="let miniImage of product.images; let i = index" class="miniImage"
+                [src]="baseUrl + miniImage.imageLink" [ngClass]="{'active': selectedIndex === i}"
+                (click)="selectImage(i)">
+        </div>
 
-    <h3 class="d-flex text-left pt-3">{{product.title}}</h3>
-    <div class="d-flex pt-1 pb-3">{{product.address}}</div>
-    <div class="d-flex col-12 pt-3 pb-3 border-top border-bottom">
-        <div class="col-lg-2 ">
-            <div class="d-flex gray-font">Mức giá</div>
-            <div class="d-flex bold-font">{{product.price + ' ' + product.unit}}</div>
+        <h3 class="d-flex text-left pt-3">{{product.title}}</h3>
+        <div class="d-flex pt-1 pb-3">{{product.address}}</div>
+        <div class="d-flex col-12 pt-3 pb-3 border-top border-bottom">
+            <div class="col-lg-2 ">
+                <div class="d-flex gray-font">Mức giá</div>
+                <div class="d-flex bold-font">{{product.price + ' ' + product.unit}}</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="d-flex gray-font">Diện tích</div>
+                <div class="d-flex bold-font">{{product.area}} m²</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="d-flex gray-font">Phòng ngủ</div>
+                <div class="d-flex bold-font">{{product.bedrooms}} PN</div>
+            </div>
         </div>
-        <div class="col-lg-2">
-            <div class="d-flex gray-font">Diện tích</div>
-            <div class="d-flex bold-font">{{product.area}} m²</div>
+        <div>
+            <h5 class="d-flex pt-5 pb-2">Thông tin mô tả</h5>
+            <div class="d-flex text-left">{{product.description}}</div>
         </div>
-        <div class="col-lg-2">
-            <div class="d-flex gray-font">Phòng ngủ</div>
-            <div class="d-flex bold-font">{{product.bedrooms}} PN</div>
+        <div>
+            <h5 class="d-flex pt-5 pb-4"> Đặc điểm bất động sản</h5>
+            <div class="row d-flex">
+                <div class="col-5 ml-2">
+                    <div class="row border-top pt-2 pb-2">
+                        <div class="col-1 text-left np" style="margin-right: 10px;">
+                            <i class="fa-solid fa-house"></i>
+                        </div>
+                        <div class="col-5 text-left np feature-font">Diện tích</div>
+                        <div class="col-5 text-left np">{{product.area}} m²</div>
+                    </div>
+                    <div class="row border-top pt-2 pb-2">
+                        <div class="col-1 text-left np" style="margin-right: 10px;">
+                            <i class="fa-solid fa-bed"></i>
+                        </div>
+                        <div class="col-5 text-left np feature-font">Số phòng ngủ</div>
+                        <div class="col-5 text-left np">{{product.bedrooms}} phòng</div>
+                    </div>
+                    <div class="row border-top pt-2 pb-2 border-bottom">
+                        <div class="col-1 text-left np" style="margin-right: 10px;">
+                            <i class="fa-solid fa-file"></i>
+                        </div>
+                        <div class="col-5 text-left np feature-font">Pháp lý</div>
+                        <div class="col-5 text-left np">{{product.document}}</div>
+                    </div>
+                </div>
+                <div class="col-5 ">
+                    <div class="row border-top pt-2 pb-2">
+                        <div class="col-1 text-left np" style="margin-right: 10px;">
+                            <i class="fa-solid fa-dong-sign"></i>
+                        </div>
+                        <div class="col-5 text-left np feature-font">Mức giá</div>
+                        <div class="col-5 text-left np">{{product.price + ' ' + product.unit}}</div>
+                    </div>
+                    <div class="row border-top pt-2 pb-2">
+                        <div class="col-1 text-left np" style="margin-right: 10px;">
+                            <i class="fa-solid fa-bath"></i>
+                        </div>
+                        <div class="col-5 text-left np feature-font">Số toilet</div>
+                        <div class="col-5 text-left np">{{product.wc}} phòng</div>
+                    </div>
+                    <div class="row border-top pt-2 pb-2 border-bottom">
+                        <div class="col-1 text-left np" style="margin-right: 10px;">
+                            <i class="fa-solid fa-couch"></i>
+                        </div>
+                        <div class="col-5 text-left np feature-font">Nội thất</div>
+                        <div class="col-5 text-left np">{{product.interior}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row mt-5 mb-5 m-date border-bottom border-top pb-2 pt-2">
+                <div class="col-3 text-left np">
+                    <div class="gray-font">Ngày đăng</div>
+                    <div class="feature-font">{{product.startDate}}</div>
+                </div>
+                <div class="col-3 text-left np">
+                    <div class="gray-font">Ngày hết hạn</div>
+                    <div class="feature-font">{{product.endDate}}</div>
+                </div>
+                <div class="col-3 text-left np">
+                    <div class="gray-font">Loại tin</div>
+                    <div class="feature-font">{{product.package.name}}</div>
+                </div>
+            </div>
         </div>
     </div>
-    <div>
-        <h5 class="d-flex pt-5 pb-2">Thông tin mô tả</h5>
-        <div class="d-flex text-left">{{product.description}}</div>
-    </div>
-    <div>
-        <h5 class="d-flex pt-5 pb-4"> Đặc điểm bất động sản</h5>
-        <div class="row d-flex">
-            <div class="col-5 ml-2">
-                <div class="row border-top pt-2 pb-2">
-                    <div class="col-1 text-left np" style="margin-right: 10px;">
-                        <i class="fa-solid fa-house"></i>
-                    </div>
-                    <div class="col-5 text-left np feature-font">Diện tích</div>
-                    <div class="col-5 text-left np">{{product.area}} m²</div>
-                </div>
-                <div class="row border-top pt-2 pb-2">
-                    <div class="col-1 text-left np" style="margin-right: 10px;">
-                        <i class="fa-solid fa-bed"></i>
-                    </div>
-                    <div class="col-5 text-left np feature-font">Số phòng ngủ</div>
-                    <div class="col-5 text-left np">{{product.bedrooms}} phòng</div>
-                </div>
-                <div class="row border-top pt-2 pb-2 border-bottom">
-                    <div class="col-1 text-left np" style="margin-right: 10px;">
-                        <i class="fa-solid fa-file"></i>
-                    </div>
-                    <div class="col-5 text-left np feature-font">Pháp lý</div>
-                    <div class="col-5 text-left np">{{product.document}}</div>
-                </div>
+    <div class="sidebar">
+        <div class="sidebar-content">
+            <img class="re__contact-avatar" src={{imgLink}}>
+
+            <span class="sub-img">Được đăng bởi</span>
+            <div class="user-name">
+                <a>
+                    {{userName}}
+                </a>
             </div>
-            <div class="col-5 ">
-                <div class="row border-top pt-2 pb-2">
-                    <div class="col-1 text-left np" style="margin-right: 10px;">
-                        <i class="fa-solid fa-dong-sign"></i>
-                    </div>
-                    <div class="col-5 text-left np feature-font">Mức giá</div>
-                    <div class="col-5 text-left np">{{product.price + ' ' + product.unit}}</div>
-                </div>
-                <div class="row border-top pt-2 pb-2">
-                    <div class="col-1 text-left np" style="margin-right: 10px;">
-                        <i class="fa-solid fa-bath"></i>
-                    </div>
-                    <div class="col-5 text-left np feature-font">Số toilet</div>
-                    <div class="col-5 text-left np">{{product.wc}} phòng</div>
-                </div>
-                <div class="row border-top pt-2 pb-2 border-bottom">
-                    <div class="col-1 text-left np" style="margin-right: 10px;">
-                        <i class="fa-solid fa-couch"></i>
-                    </div>
-                    <div class="col-5 text-left np feature-font">Nội thất</div>
-                    <div class="col-5 text-left np">{{product.interior}}</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class="row mt-5 mb-5 m-date border-bottom border-top pb-2 pt-2">
-            <div class="col-3 text-left np">
-                <div class="gray-font">Ngày đăng</div>
-                <div class="feature-font">{{product.startDate}}</div>
-            </div>
-            <div class="col-3 text-left np">
-                <div class="gray-font">Ngày hết hạn</div>
-                <div class="feature-font">{{product.endDate}}</div>
-            </div>
-            <div class="col-3 text-left np">
-                <div class="gray-font">Loại tin</div>
-                <div class="feature-font">{{product.package.name}}</div>
+            <div class="phone-number">
+                <span>
+                    {{phoneNumber}}
+                </span>
             </div>
         </div>
     </div>

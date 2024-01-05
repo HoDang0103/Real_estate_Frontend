@@ -62,6 +62,7 @@ export class AccountManagerComponent {
   ngOnInit(): void {
 
     this.user = this.token.getInfoUser();
+    console.log(this.user);
     if(this.user.img !== ""){
       this.imagePreview[0] = this.user.img;
     }

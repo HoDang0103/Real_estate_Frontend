@@ -78,6 +78,7 @@ export class ProductsComponent implements OnInit {
         }
       }))
       this.productsArray = this.saleArray;
+      console.log(this.saleArray);
     });
 
   }

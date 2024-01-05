@@ -99,8 +99,8 @@ export class AppComponent {
     // }
 
     const account = {
-      "username": 'user2',
-      "password": 'User@1'
+      "username": 'hungtest',
+      "password": 'Abcd1234!'
     }
 
     this.accountSrv.postLogin(account).subscribe({
