@@ -21,12 +21,12 @@
                         <div class="re-arrow">
                         </div>
                         <ul class="dropdown-menu  " aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item " routerLink="/products">Bán căn hộ chung cư</a></li>
-                            <li><a class="dropdown-item" routerLink="/products">Bán nhà riêng</a></li>
-                            <li><a class="dropdown-item" routerLink="/products">Bán nhà mặt phố</a></li>
-                            <li><a class="dropdown-item" routerLink="/products">Bán đất</a></li>
-                            <li><a class="dropdown-item" routerLink="/products">Bán kho, nhà xưởng</a></li>
-                            <li><a class="dropdown-item" routerLink="/products">Khác</a></li>
+                            <li><a class="dropdown-item " [routerLink]="['/products',1]">Bán căn hộ chung cư</a></li>
+                            <li><a class="dropdown-item" [routerLink]="['/products',2]">Bán nhà riêng</a></li>
+                            <li><a class="dropdown-item" (click)="selectProduct(3)">Bán nhà mặt phố</a></li>
+                            <li><a class="dropdown-item" (click)="selectProduct(4)">Bán đất</a></li>
+                            <li><a class="dropdown-item" (click)="selectProduct(5)">Bán kho, nhà xưởng</a></li>
+                            <li><a class="dropdown-item" (click)="selectProduct(6)">Khác</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -53,210 +53,50 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0  text-center ">
 
-                    <li *ngIf="!loggedObj.custId">
+                    <li *ngIf="!isAuth">
                         <div class="d-flex justify-content-evenly mt-2">
                             <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                                 aria-controls="offcanvasRight"> <button class="btn btn-login px-3"
                                     (click)="showLogin()">Đăng nhập</button></a>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> <button
-                                    class="btn btn-login px-3">Đăng kí</button></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button class="btn btn-login px-3" (click)="showRegister()">Đăng kí</button></a>
                         </div>
                     </li>
+                    <li class="nav-item dropdown" *ngIf="isAuth">
+                        <div class="dropdown-toggle fw-semibold text-uppercase text-black  me-1 text-danger d-flex align-items-center"
+                            style="height: 50px;">
+                            <div class="avatar-container">
+                                <img src={{user.img}} alt="Avatar" class="avatar">
+                            </div>
+                            <div class="user-info">
+                                <div class="user-name">{{user.fullName}}</div>
+                            </div>
+                        </div>
+                        <!-- <a class="nav-link dropdown-toggle fw-semibold text-uppercase text-black  me-1 text-danger"
+                            href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Nhà đất bán
+                        </a> -->
+                        <div class="re-arrow">
+                        </div>
+                        <ul class="dropdown-menu  " aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item " routerLink="">Quản lý tin đăng</a></li>
+                            <li><a class="dropdown-item" routerLink="/account-manager">Thay đổi thông tin cá nhân</a>
+                            </li>
+                            <li><a class="dropdown-item" (click)="selectProduct(3)">Thay đổi mật khẩu</a></li>
+                            <li><a class="dropdown-item" (click)="selectProduct(4)">Nạp tiền</a></li>
+                            <li><a class="dropdown-item" (click)="selectProduct(5)">Đăng xuất</a></li>
+                        </ul>
+                    </li>
                     <li>
-                        <div class="d-flex justify-content-evenly mt-2">
+                        <div class="d-flex justify-content-center mt-2">
                             <a routerLink="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> <button
                                     class="btn btn-login px-3">Đăng tin</button></a>
 
                         </div>
                     </li>
-
-
                 </ul>
             </div>
         </div>
-    </nav>
-    <nav class="navbar navbar-expand-lg navbar-light border-bottom border-top">
-        <div class="col-12">
-            <div class="d-flex" style="height: 70px; ">
-                <!-- bán cho thuê -->
-                <div class="d-flex " style="max-width: fit-content; max-height: fit-content; align-items: center;">
-                    <button class="btn" [class]="">Bán</button>
-                    <button class="btn">Cho thuê</button>
-                </div>
-                <!-- search -->
-                <div class="d-flex input-group px-2 " style="width: 30%;">
-                    <div class="icon-search">
-                        <i class="fa fa-search" style="color: black"></i>
-                    </div>
-                    <input type="text" class="input-search" placeholder="Nhập thông tin bạn cần tìm">
-                </div>
-                <!-- loc -->
-                <div class=" d-flex " >
-                    <!-- Loại nhà đất -->
-                    <div class="nav-item dropdown  px-3 pr-8">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Loại nhà đất
-                            </button>
-                            <div class="dropdown-menu" ria-labelledby="dropdownMenuButton">
-                                <div *ngFor="let option of optionsType; let i = index" class="dropdown-item">
-                                    <input type="checkbox" [checked]="option.selected" (change)="toggleOptionType(i)">
-                                    {{
-                                    option.value }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div *ngIf="selectedOptionsType.length > 0">
-                            <div class="ellipsis">
-                                <p>{{ selectedOptionsType.join(', ') }}</p>
-                            </div>
-                        </div>
-                        <ng-template #other_content>Tất cả</ng-template>
-                    </div>
-
-
-                    <!-- Khu vực -->
-                    <div class="nav-item dropdown  px-3 pr-8">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Khu vực
-                            </button>
-                            <div class="dropdown-menu" ria-labelledby="dropdownMenuButton1">
-                                <div class="dropdown">
-                                    <label class="lab-area">Tỉnh, thành phố</label>
-                                    <select class="sel-area" id="province" style="border-radius: 10px;">
-                                        <option>Hồ Chí Minh</option>
-                                    </select>
-                                    <label class="lab-area"> Quận, huyện</label>
-                                    <select class="sel-area" id="districtSelect" (change)="toggleOptionArea($event)">
-                                        <option *ngFor="let district of districtArray; let i = index"
-                                            [value]="district.district_name">
-                                            {{ district.district_name }}
-                                        </option>
-
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div *ngIf="optionsArea">
-                            <div class="ellipsis">
-                                <p>HCM, {{optionsArea}}</p>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Mức giá -->
-                    <div class="nav-item dropdown  px-3 pr-8" >
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Mức giá
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <div class="dropdown-item" (click)="toggleOptionPrice(1)" [hidden]="isSale">Dưới 5 triệu
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionPrice(5)" [hidden]="isSale">5 - 10 triệu
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionPrice(10)" [hidden]="isSale">10 - 50
-                                    triệu
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionPrice(50)" [hidden]="isSale">50 - 100
-                                    triệu
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionPrice(100)" [hidden]="isSale">100 - 200
-                                    triệu</div>
-                                <div class="dropdown-item" (click)="toggleOptionPrice(200)" [hidden]="isSale">200 - 500
-                                    triệu</div>
-                                <div class="dropdown-item" (click)="toggleOptionPrice(500)" [hidden]="isSale">500 - 800
-                                    triệu</div>
-                                <div class="dropdown-item" (click)="toggleOptionPrice(800)" [hidden]="isSale">800 triệu
-                                    - 1
-                                    tỉ</div>
-                                <div class="dropdown-item" (click)="toggleOptionPrice(1000)" [hidden]="isSale">1 - 2 tỉ
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionPrice(2000)" [hidden]="isSale">2 - 5 tỉ
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionPrice(5000)" [hidden]="isSale">5 - 7 tỉ
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionPrice(7000)" [hidden]="isSale">7 - 10 tỉ
-                                </div>
-                            </div>
-                        </div>
-
-                        <div *ngIf="optionPrice != null">
-                            <div class="ellipsis">
-                                <p>{{ optionPrice }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Diện tích -->
-                    <div class="nav-item dropdown px-3 pr-8" >
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Diện tích
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <div class="dropdown-item" (click)="toggleOptionAcreage(1)" [hidden]="isSale">Dưới 30 m²
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionAcreage(30)" [hidden]="isSale">30 - 50
-                                    m²
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionAcreage(50)" [hidden]="isSale">50 - 80
-                                    m²
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionAcreage(80)" [hidden]="isSale">80 - 100
-                                    m²
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionAcreage(100)" [hidden]="isSale">100 -
-                                    150 m²
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionAcreage(150)" [hidden]="isSale">150 -
-                                    200 m²
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionAcreage(200)" [hidden]="isSale">200 -
-                                    250 m²
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionAcreage(250)" [hidden]="isSale">250 -
-                                    300 m²
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionAcreage(300)" [hidden]="isSale">300 -
-                                    500 m²
-                                </div>
-                                <div class="dropdown-item" (click)="toggleOptionAcreage(500)" [hidden]="isSale">Trên 500
-                                    m²
-                                </div>
-                            </div>
-                        </div>
-
-                        <div *ngIf="optionAcreage != null">
-                            <div class="ellipsis">
-                                <p>{{ optionAcreage }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- tim kiem -->
-                <div class="option  d-flex  mx-3"
-                    style="align-items: center; ">
-                    <div class="d-flex justify-content-evenly mt-2" style=" height: 40px;">
-                        <button class="btn btn-type">Tìm kiếm</button>
-                    </div>
-                    <div class="d-flex  mt-2 "
-                        style="height: 40px; padding: 0px;">
-                        <button class="btn btn-type">Đặt lại</button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-
     </nav>
 </header>
 <router-outlet></router-outlet>
@@ -269,7 +109,7 @@
             <img class="resizable-image mt-0" style="border-radius: 5px 0 0 5px;" src="/assets/images/login3.jpg"
                 alt="">
         </div>
-        <div class="col-7">
+        <div class="col-7" *ngIf="!forgotPassword&&!register">
             <div class="d-flex mt-2" style="justify-content: right;">
                 <button class="btn-x" (click)="closeLogin()">
                     <i class="fa-solid fa-x"></i>
@@ -281,25 +121,126 @@
             <h3 class="mt-2 mb-2">Đăng nhập để tiếp tục</h3>
             <div class="mt-4 mb-2 login-group">
                 <i class="fa-solid fa-user"></i>
-                <input class="input-custom" type="text" placeholder="Username">
+                <input class="input-custom" type="text" placeholder="Username" [(ngModel)]="user.userName"
+                    name="userName">
             </div>
-            <div class="d-flex mt-3 mb-2 login-group">
-                <i class="fa-solid fa-user d-flex align-items-center"></i>
-                <input [type]="passwordType" class="input-custom" id="password" placeholder="password" name="password"
-                    [(ngModel)]="password" style="margin-right: 5px;" required>
+            <div class="d-flex mt-3 login-group">
+                <i class="fa-solid fa-lock d-flex align-items-center"></i>
+                <input [type]="passwordType" class="input-custom" id="password1" placeholder="password" name="password1"
+                    [(ngModel)]="user.password" style="margin-right: 5px;" name="password" required>
                 <div class="input-group-append ml-auto">
                     <button class="eye-btn" type="button" (click)="togglePasswordVisibility()">
                         <i class="fa" [ngClass]="{'fa-eye': showPassword, 'fa-eye-slash': !showPassword}"></i>
                     </button>
                 </div>
             </div>
+
+            <div style="height: 19.5px;">
+                <div *ngIf="errorMessage" class="text-danger " style="font-size: 13px;">
+                    {{ errorMessage }}
+                </div>
+            </div>
+
             <div class="mt-3 mb-2">
-                <button class="btn-log"> Đăng nhập</button>
+                <button class="btn-log" (click)="onLogin()"> Đăng nhập</button>
             </div>
             <div class="mt-1 d-flex mb-4">
-                <button class="btn-res">Quên mật khẩu?</button>
+                <button class="btn-res" (click)="setForgotPassword()">Quên mật khẩu?</button>
+            </div>
+            <div class="mt-1 d-flex mb-4 justify-content-center">
+                Chưa là thành viên?
+                <button class="btn-res-login" (click)="showRegister()">Đăng ký</button>
+                tại đây
             </div>
         </div>
 
+        <!-- Quên mật khẩu -->
+        <div class="col-7" *ngIf="forgotPassword&&!register">
+            <div class="d-flex mt-2" style="justify-content: left;">
+                <button class="btn-x" (click)="setForgotPassword()">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </div>
+            <h6 class=" mb-2 mt-2">
+                Khôi phục mật khẩu
+            </h6>
+            <div class="mt-4 mb-2 login-group">
+                <i class="fa-solid fa-envelope"></i>
+                <input class="input-custom" type="text" placeholder="Nhập email" [(ngModel)]="user.email" name="email">
+            </div>
+            <div class="mt-3 mb-2">
+                <button class="btn-log">Gửi</button>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- đăng kí -->
+        <div class="col-7" *ngIf="register">
+            <div class="d-flex mt-2" style="justify-content: right;">
+                <button class="btn-x" (click)="closeLogin()">
+                    <i class="fa-solid fa-x"></i>
+                </button>
+            </div>
+            <h6 class=" mb-2 mt-2">
+                Xin chào bạn
+            </h6>
+            <h3 class="mt-2 mb-2">Đăng kí tài khoản mới</h3>
+            <div class="mt-4 mb-2 login-group">
+                <i class="fa-solid fa-user"></i>
+                <input class="input-custom" type="text" placeholder="UserName" [(ngModel)]="user.userName"
+                    name="userName">
+            </div>
+            <div class="mt-4 mb-2 login-group">
+                <i class="fa-solid fa-envelope"></i>
+                <input class="input-custom" type="text" placeholder="Email" [(ngModel)]="user.email" name="email">
+            </div>
+            <div class="d-flex mt-3 mb-2 login-group">
+                <i class="fa-solid fa-lock d-flex align-items-center"></i>
+                <input [type]="passwordType" class="input-custom" id="password" placeholder="Password" name="password"
+                    [(ngModel)]="user.password" style="margin-right: 5px;" name="password" required>
+                <div class="input-group-append ml-auto">
+                    <button class="eye-btn" type="button" (click)="togglePasswordVisibility()">
+                        <i class="fa" [ngClass]="{'fa-eye': showPassword, 'fa-eye-slash': !showPassword}"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="d-flex mt-3 mb-2 login-group">
+                <i class="fa-solid fa-lock d-flex align-items-center"></i>
+                <input [type]="checkPasswordType" class="input-custom" id="password2" placeholder="Nhập lại Password"
+                    name="password" [(ngModel)]="checkPassword" style="margin-right: 5px;" name="checkPassword"
+                    required>
+                <div class="input-group-append ml-auto">
+                    <button class="eye-btn" type="button" (click)="toggleCheckPasswordVisibility()">
+                        <i class="fa" [ngClass]="{'fa-eye': showCheckPassword, 'fa-eye-slash': !showCheckPassword}"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mt-4 mb-2 login-group">
+                <i class="fa-solid fa-phone"></i>
+                <input class="input-custom" type="text" placeholder="Số điện thoại" [(ngModel)]="user.phoneNumber"
+                    name="phoneNumber">
+            </div>
+            <div class="mt-4 mb-2 login-group">
+                <i class="fa-regular fa-id-card"></i>
+                <input class="input-custom" type="text" placeholder="Fullname" [(ngModel)]="user.fullName"
+                    name="fullName">
+            </div>
+            <div class="mt-3 mb-2">
+                <button class="btn-log" (click)="onRegister()">Đăng kí</button>
+            </div>
+
+            <div class="mt-1 d-flex mb-4 justify-content-center">
+                Bạn đã có tài khoản?
+                <button class="btn-res-login" (click)="showLogin()">Đăng nhập</button>
+                tại đây
+            </div>
+        </div>
+
+
     </form>
 </div>
+<app-success-popup *ngIf="showSuccessMessage" [title]="popupTitle" [message]="popupMessage"
+    [isSuccess]="isSuccess"></app-success-popup>

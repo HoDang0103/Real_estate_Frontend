@@ -1,7 +1,201 @@
 <section id="product">
+    <div class=" border-bottom border-top">
+        <div class="col-12">
+            <div class="d-flex" style="height: 70px; ">
+                <!-- bán cho thuê -->
+                <div class="d-flex " style="max-width: fit-content; max-height: fit-content; align-items: center;">
+                    <button class="btn" [ngClass]="{'btn-noChoose': !isSale, 'btn-choose': isSale}"
+                        (click)="sale()">Bán</button>
+                    <button class="btn" [ngClass]="{'btn-noChoose': isSale, 'btn-choose': !isSale}"
+                        (click)="noSale()">Cho thuê</button>
+                </div>
+                <!-- search -->
+                <div class="d-flex input-group px-2 " style="width: 20%;">
+                    <div class="icon-search">
+                        <i class="fa fa-search" style="color: black"></i>
+                    </div>
+                    <input type="text" class="input-search" placeholder="Nhập thông tin bạn cần tìm" [(ngModel)]="search" (keyup.enter)="searchData()">
+                </div>
+                <!-- loc -->
+                <div class=" d-flex row " style="max-width: 50%; min-width: 50%;">
+                    <!-- Loại nhà đất -->
+                    <div class="nav-item dropdown  px-3 pr-8 col-3" style="margin-left: 10px;">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Loại nhà đất
+                            </button>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-item" (click)="toggleOptionType('Căn hộ chung cư')">Căn hộ chung cư
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionType('Nhà riêng')">Nhà riêng
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionType('Nhà mặt phố')">Nhà mặt phố
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionType('Đất')">Đất
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionType('Kho, xưởng')">Kho, xưởng
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionType('Bất động sản khác')">Bất động sản khác
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div *ngIf="optionsType">
+                            <div class="ellipsis">
+                                <p>{{optionsType}}</p>
+                            </div>
+                        </div>
+                        <ng-template #other_content>Tất cả</ng-template>
+                    </div>
+
+
+                    <!-- Khu vực -->
+                    <div class="nav-item dropdown  px-3 pr-8 col-4">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Khu vực
+                            </button>
+                            <div class="dropdown-menu" ria-labelledby="dropdownMenuButton1">
+                                <div class="dropdown">
+                                    <label class="lab-area">Tỉnh, thành phố</label>
+                                    <select class="sel-area" id="province" style="border-radius: 10px;">
+                                        <option>Hồ Chí Minh</option>
+                                    </select>
+                                    <label class="lab-area"> Quận, huyện</label>
+                                    <select class="sel-area" id="districtSelect" (change)="toggleOptionArea($event)">
+                                        <option *ngFor="let district of districtArray; let i = index"
+                                            [value]="district.district_name">
+                                            {{ district.district_name }}
+                                        </option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="optionsArea">
+                            <div class="ellipsis">
+                                <p>HCM, {{optionsArea}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mức giá -->
+                    <div class="nav-item dropdown  px-3 pr-8 col-2">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Mức giá
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-item" (click)="toggleOptionPrice(1)" [hidden]="isSale">Dưới 5 triệu
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionPrice(5)" [hidden]="isSale">5 - 10 triệu
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionPrice(10)" [hidden]="isSale">10 - 50
+                                    triệu
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionPrice(50)" [hidden]="isSale">50 - 100
+                                    triệu
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionPrice(100)" [hidden]="isSale">100 - 200
+                                    triệu</div>
+                                <div class="dropdown-item" (click)="toggleOptionPrice(200)" [hidden]="isSale">200 - 500
+                                    triệu</div>
+                                <div class="dropdown-item" (click)="toggleOptionPrice(500)" [hidden]="!isSale">500 - 800
+                                    triệu</div>
+                                <div class="dropdown-item" (click)="toggleOptionPrice(800)" [hidden]="!isSale">800 triệu
+                                    - 1
+                                    tỉ</div>
+                                <div class="dropdown-item" (click)="toggleOptionPrice(1000)" [hidden]="!isSale">1 - 2 tỉ
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionPrice(2000)" [hidden]="!isSale">2 - 5 tỉ
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionPrice(5000)" [hidden]="!isSale">5 - 7 tỉ
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionPrice(7000)" [hidden]="isSale">7 - 10 tỉ
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="optionPrice != null">
+                            <div class="ellipsis">
+                                <p>{{ optionPrice }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Diện tích -->
+                    <div class="nav-item dropdown px-3 pr-8 col-2">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Diện tích
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-item" (click)="toggleOptionAcreage(1)">Dưới 30 m²
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionAcreage(30)">30 - 50
+                                    m²
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionAcreage(50)">50 - 80
+                                    m²
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionAcreage(80)">80 - 100
+                                    m²
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionAcreage(100)">100 -
+                                    150 m²
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionAcreage(150)">150 -
+                                    200 m²
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionAcreage(200)">200 -
+                                    250 m²
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionAcreage(250)">250 -
+                                    300 m²
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionAcreage(300)">300 -
+                                    500 m²
+                                </div>
+                                <div class="dropdown-item" (click)="toggleOptionAcreage(500)">Trên 500
+                                    m²
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="optionAcreage != null">
+                            <div class="ellipsis">
+                                <p>{{ optionAcreage }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- tim kiem -->
+                <div class="option  d-flex  mx-3" style="align-items: center; ">
+                    <div class="d-flex justify-content-evenly mt-2" style=" height: 40px;">
+                        <button class="btn btn-type" (click)="searchAll()">Tìm kiếm</button>
+                    </div>
+                    <div class="d-flex  mt-2 " style="height: 40px; padding: 0px; margin-left: 20px;">
+                        <button class="btn btn-type" (click)="reSearch()">Đặt lại</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
     <div class="container">
         <div class="row">
-            
+
             <div class="col-12">
                 <div class="row mt-3">
                     <div class="col-lg-8 col-md-12 " style="margin: 20px 0px 20px 100px;" *ngFor="let product of productsArray | paginate:{
@@ -12,24 +206,16 @@
                             <div class="card mt-2" (click)="redirectToProductDetail(product.id)">
                                 <div class="grid-container">
                                     <div class="item-1">
-                                        <img class="grid-item"
-                                            src={{baseUrl+product.images[0].imageLink}}
-                                            alt="">
+                                        <img class="grid-item" src={{baseUrl+product.images[0].imageLink}} alt="">
                                     </div>
                                     <div class="item-2">
-                                        <img class="grid-item"
-                                            src={{baseUrl+product.images[1].imageLink}}
-                                            alt="">
+                                        <img class="grid-item" src={{baseUrl+product.images[1].imageLink}} alt="">
                                     </div>
                                     <div class="item-3">
-                                        <img class="grid-item"
-                                            src={{baseUrl+product.images[2].imageLink}}
-                                            alt="">
+                                        <img class="grid-item" src={{baseUrl+product.images[2].imageLink}} alt="">
                                     </div>
                                     <div class="item-4">
-                                        <img class="grid-item"
-                                            src={{baseUrl+product.images[3].imageLink}}
-                                            alt="">
+                                        <img class="grid-item" src={{baseUrl+product.images[3].imageLink}} alt="">
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -57,18 +243,18 @@
                                         <div class="col-6">
                                             <div class="user-card">
                                                 <div class="avatar-container">
-                                                  <img  src={{product.user.image}} alt="Avatar" class="avatar">
+                                                    <img src={{product.user.image}} alt="Avatar" class="avatar">
                                                 </div>
                                                 <div class="user-info">
-                                                  <div class="user-name">{{product.user.fullName}}</div>
-                                                  <div class="post-date">{{product.startDate}}</div>
+                                                    <div class="user-name">{{product.user.fullName}}</div>
+                                                    <div class="post-date">{{product.startDate}}</div>
                                                 </div>
-                                              </div>
+                                            </div>
                                         </div>
                                         <div class="col-6 d-flex justify-content-end phone-div">
                                             <button class="phone-button">
                                                 <i class="fas fa-phone"></i> {{product.user.phoneNumber}}
-                                              </button>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -76,13 +262,10 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <div class="col-10 justify-content-center" style="display: flex; margin-top: 30px;">
-                <pagination-controls
-                previousLabel="Prew"
-                nextLabel="Next"
-                (pageChange)="onTableDataChange($event)">
+                <pagination-controls previousLabel="Prew" nextLabel="Next" (pageChange)="onTableDataChange($event)">
                 </pagination-controls>
             </div>
         </div>

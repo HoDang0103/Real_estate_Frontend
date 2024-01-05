@@ -1,0 +1,170 @@
+<div class="background">
+    <div class="container accManagerTitle">
+        <div class="wrapper" *ngIf="!isMoney">
+            <h2 class="title">Quản lí tài khoản</h2>
+            <div id="tabs" #tabs>
+                <ul class="tabsHeading">
+                    <li class="nav-item active tab " [ngClass]="{'tabActive': activeTab == 'search'}">
+                        <a class="nav-link" [ngClass]="{ active: activeTab === 'search' }" (click)="search('search')"
+                            data-toggle="tab">Chỉnh sửa thông tin</a>
+                    </li>
+                    <li class="nav-item tab" [ngClass]="{'tabActive': activeTab !== 'search'}">
+                        <a class="nav-link" [ngClass]="{ active: activeTab === 'result' }" data-toggle="tab"
+                            (click)="result('result')">Cài đặt tài khoản</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" id="search" [ngClass]="{ active: activeTab === 'search' }">
+                        <form action="submit" class="form">
+                            <div class="formInfoSection formSection">
+                                <h4 class="formTitle">Thông tin cá nhân</h4>
+                                <div class="formAvatar">
+                                    <div *ngIf="imagePreview.length == 0">
+                                        <div class="formAvatarIcon" (click)="openFileInput()">
+                                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+                                                aria-labelledby="CameraIcon"
+                                                class="lava-c-PJLV lava-c-PJLV-hakyQ-display-block lava-c-PJLV-irQeQW-size-md">
+                                                <path
+                                                    d="M4.8 19h14.4c.477 0 .935-.175 1.273-.488.337-.312.527-.736.527-1.177V9.44c0-.442-.19-.866-.527-1.178a1.877 1.877 0 0 0-1.273-.488h-3L14.4 5H9.6L7.8 7.775h-3c-.477 0-.935.176-1.273.488A1.604 1.604 0 0 0 3 9.441v7.894c0 .441.19.865.527 1.177.338.313.796.488 1.273.488Z"
+                                                    stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                                <path d="M12 15.81a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor"
+                                                    stroke-miterlimit="10" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="formAvatarTitle">Tải ảnh</div>
+                                    </div>
+
+                                    <div class="formAvatarUpload" *ngIf="imagePreview.length > 0">
+                                        <img [src]="imagePreview[0]" alt="Preview" *ngIf="user.img === ''">
+                                        <img src={{imagePreview[0]}} alt="Preview">
+                                    </div>
+
+                                    <input type="file" #fileInput style="display: none"
+                                        (change)="onFileSelected($event)" accept="image/*">
+                                </div>
+                                <div class="formInfo">
+                                    <div class="formName formInfoItem">
+                                        <div class="formNameTitle formTitle">Họ và tên</div>
+                                        <div class="formNameWrapper formInputWrapper">
+                                            <input type="text" class="formNameInput formInput"
+                                                [(ngModel)]="user.fullName" name="fullName" />
+                                            <div class="formIcon">
+                                                <div class="formAvatarIcon">x</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="formCode formInfoItem">
+                                        <div class="formCodeTitle formTitle">
+                                            Số dư tài khoản
+                                        </div>
+                                        <div class="formCodeWrapper d-flex" style="justify-content: space-between;">
+                                            <div class="formInputWrapper" style="width: 60%">
+                                                <input type="text" class="formNameInput formInput" disabled="true"
+                                                    [(ngModel)]="user.surplus" name="surplus" />
+                                            </div>
+                                            <div class="formTopup">
+                                                <button class="formTopupButton" (click)="showTopup()">Nạp tiền</button>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="formContactSection formSection">
+                                <h3 class="formTitle">Thông tin liên hệ</h3>
+                                <div class="formContact">
+                                    <div class="formContactPhone">
+                                        <div class="formContactTitle formTitle">
+                                            Số điện thoại
+                                        </div>
+                                        <div class="formContactWrapper">
+                                            <input type="text" class="formContactInput formInput"
+                                                [(ngModel)]="user.phoneNumber" name="phoneNumber" />
+                                        </div>
+                                    </div>
+                                    <div class="formEmail">
+                                        <div class="formEmailTitle formTitle">Email</div>
+                                        <div class="formEmailWrapper">
+                                            <input type="text" class="formContactNameInput" [(ngModel)]="user.email"
+                                                name="email" disabled="true" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="formSubmit">
+                                <button class="formSubmitButton" (click)="upDateUser()">Lưu thay đổi</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="results" [ngClass]="{ active: activeTab === 'result' }">
+                        <div class="formCBillSection formSection">
+                            <h3 class="formTitle">Đổi mật khẩu</h3>
+                            <div class="formRow formInfo">
+                                <div class="formBuyer formInfoItem">
+                                    <div class="formBuyerTitle formTitle">
+                                        Mật khẩu hiện tại
+                                    </div>
+                                    <div class="formBuyerWrapper formInputWrapper">
+                                        <input type="text" class="formBuyerInput formInput" [(ngModel)]="nowPass"
+                                            name="nowPass" />
+                                        <div class="formIcon">
+                                            <div class="formAvatarIcon">x</div>
+                                        </div>
+                                    </div>
+                                    <div class="formSubtitle">Bạn quên mật khẩu?</div>
+                                </div>
+
+                            </div>
+                            <div class="formRow formInfo">
+                                <div class="formCode formInfoItem">
+                                    <div class="formCodeTitle formTitle">Mật khẩu mới</div>
+                                    <div class="formCodeWrapper formInputWrapper">
+                                        <input type="text" class="formNameInput formInput" [(ngModel)]="newPass"
+                                            name="newPass" />
+                                        <div class="formIcon">
+                                            <div class="formAvatarIcon">x</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="formRow">
+                                <div class="formAddress">
+                                    <div class="formAddressTitle formTitle">Nhập lại mật khẩu mới</div>
+                                    <div class="formAddressWrapper formInputWrapper">
+                                        <input type="text" class="formAddressInput formInput" placeholder="" />
+                                        <div class="formIcon">
+                                            <div class="formAvatarIcon">x</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="formSubmit">
+                            <button class="formSubmitButton"(click)="resetPassword()">Lưu thay đổi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper" *ngIf="isMoney">
+            <div class="d-flex align-items-center">
+                <button style="border: 0;background-color: white; margin-right: 10px;" (click)="showTopup()">
+                    <i class="fa-solid fa-left-long" style="font-size: 20px;"></i>
+                </button>
+                <h2 class="title">Nạp tiền</h2>
+            </div>
+            <input type="number" class="formNameInput formInput input-money" [(ngModel)]="money" name="money" />
+            <div class="formTopup">
+                <button class="formTopupButton" aria-placeholder="Nhập số tiền bạn muốn nhập" (click)="topUp()" >Nạp tiền</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-success-popup *ngIf="showSuccessMessage" [message]="popupMessage"
+    [isSuccess]="isSuccess"></app-success-popup>

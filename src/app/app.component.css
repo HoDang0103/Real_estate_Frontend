@@ -253,7 +253,6 @@ li.nav-item.dropdown {
   height: 40px; 
   margin: 5px;  
   min-width: 100px;
-  border: 1px black solid;
 }
 .btn-choose {
   height: 40px; 
@@ -265,7 +264,6 @@ li.nav-item.dropdown {
 }
 .form-login {
   justify-content: center;
-  align-items: center;
   width: auto;
   flex-direction: unset;
 }
@@ -280,6 +278,7 @@ li.nav-item.dropdown {
 }
 
 .input-custom {
+  width: 90%;
   border: 0px;
   margin-left: 5px;
 }
@@ -329,4 +328,24 @@ li.nav-item.dropdown {
   justify-content: right;
   border: 0;
   background: rgba(0, 0, 0, 0);
+}
+.btn-res-login {
+  background: rgba(0, 0, 0, 0);
+  border: 0;
+  color: #E03C31;
+}
+.avatar-container {
+  margin-right: 10px;
+  /* Khoảng cách giữa hình ảnh và thông tin người dùng */
+}
+
+.avatar {
+  width: 40px;
+  /* Điều chỉnh kích thước hình ảnh theo nhu cầu */
+  height: 40px;
+  border-radius: 50%;
+  /* Tạo hình tròn cho hình ảnh */
+  object-fit: cover;
+  /* Đảm bảo hình ảnh không bị méo khi hiển thị */
+  margin-bottom: 10px;
 }
