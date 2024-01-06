@@ -15,7 +15,7 @@ const routes: Routes = [
     component: ProductsComponent,
   },
   {
-    path: 'products/:select',
+    path: 'products',
     component: ProductsComponent,
   },
   {

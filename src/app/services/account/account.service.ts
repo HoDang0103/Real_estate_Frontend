@@ -14,7 +14,7 @@ export class AccountService {
     }),
   };
 
-  constructor(private http: HttpClient, private token: TokenService) {}
+  constructor(private http: HttpClient, private token: TokenService) { }
   postLogin(user: any): Observable<any[]> {
     const url = 'https://localhost:7015/api/Account/Login';
     return this.http.post<any[]>(url, user, this.httpOption);
@@ -73,12 +73,18 @@ export class AccountService {
       'Authorization',
       'Bearer ' + this.token.getAuthToken()
     );
-    console.log(url, value,  headers );
+    console.log(url, value, headers);
     return this.http.put(url, value, { headers });
   }
 
   sentOTP(email: string): Observable<any> {
-    const url = 'https://localhost:7015/api/Email/SendOTP?userEmail='+email;
-    return this.http.post<any>(url,'');
+    const url = 'https://localhost:7015/api/Email/SendOTP?userEmail=' + email;
+    return this.http.post<any>(url, '');
+  }
+
+  otpResetPassword(email: string, otp: string, newPass: string): Observable<any> {
+    const url = 'https://localhost:7015/api/Email/VerifyOTPAndResetPassword?userEmail='
+      + email + '&enteredOTP=' + otp + '&newPassword=' + newPass;
+    return this.http.post<any>(url, '');
   }
 }

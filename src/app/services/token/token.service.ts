@@ -39,6 +39,9 @@ export class TokenService {
      return temp;
     // return "hihi";
   }
+  removeAuthToken() {
+    localStorage.removeItem(this.authToken||'');
+  }
 
   setInfoUser(id: string, userName: string, password: string, email: string, phoneNumber: string, fullName: string, img: string, typeAccount: string
     , surplus: number, promotion: number) {

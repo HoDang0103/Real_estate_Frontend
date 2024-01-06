@@ -1,7 +1,7 @@
 import { SuccessPopupComponent } from './../success-popup/success-popup.component';
 import { identifierName } from '@angular/compiler';
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { addDays, format } from 'date-fns';
 import { ProductService } from 'src/app/services/product/product.service';
 import { ProvinceService } from 'src/app/services/province/province.service';
@@ -300,7 +300,8 @@ export class PostInformationComponent {
     private provincesSvr: ProvinceService,
     private tokenSvr: TokenService,
     private productSrv: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     const localData = localStorage.getItem('province');
     if (localData != null) {
@@ -534,7 +535,9 @@ export class PostInformationComponent {
           this.isSuccess = true;
           setTimeout(() => {
             this.showSuccessMessage = false;
+            this.router.navigate(['/manage-posted']);
           }, 3000); // 3 giâyFFDFG
+
         },
         error: (err: any) => {
           console.log(err);
@@ -553,7 +556,9 @@ export class PostInformationComponent {
           this.isSuccess = true;
           setTimeout(() => {
             this.showSuccessMessage = false;
+            this.router.navigate(['/manage-posted']);
           }, 3000); // 3 giâyFFDFG
+
         },
         error: (err: any) => {
           console.log(err);

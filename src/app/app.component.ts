@@ -110,7 +110,24 @@ export class AppComponent {
   }
 
   confirmOTP() {
+    const ema = encodeURIComponent(this.emailOtp);
+    const ot = encodeURIComponent(this.otp);
+    const pass = encodeURIComponent(this.passOtp);
 
+    this.accountSrv.otpResetPassword(ema, ot, pass).subscribe({
+      next: (Res: any) => {
+        this.showSuccessMessage = true;
+        this.isSuccess = true;
+        this.popupMessage = 'Đổi mật khẩu thành công'
+        setTimeout(() => {
+          this.showSuccessMessage = false;
+        }, 3000); // 3 giây
+        this.showLogin();
+      },
+      error: (err: any) => {
+        console.log(err);
+      }
+    })
   }
 
   showRegister() {
@@ -164,6 +181,17 @@ export class AppComponent {
 
   }
 
+  logOut() {
+    this.tokenSrv.removeAuthToken();
+    this.isAuth = false;
+    this.showSuccessMessage = true;
+    this.isSuccess = false;
+    this.popupMessage = 'Đăng xuất thành công'
+    setTimeout(() => {
+      this.showSuccessMessage = false;
+    }, 3000); // 3 giây
+  }
+
   onRegister() {
     const account = {
       "username": this.user.userName,
@@ -189,6 +217,9 @@ export class AppComponent {
         this.showSuccessMessage = true;
         this.isSuccess = false;
         this.popupMessage = 'Đăng ký thất bại.'
+        setTimeout(() => {
+          this.showSuccessMessage = false;
+        }, 3000); // 3 giây
       }
     })
   }
@@ -202,6 +233,7 @@ export class AppComponent {
     this.isLogin = true;
     this.register = false;
     this.errorMessage = '';
+    this.forgotPassword = false;
 
   }
   closeLogin() {

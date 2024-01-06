@@ -74,11 +74,17 @@ export class AccountManagerComponent {
           this.popupMessage = 'Đổi mật khẩu thành công.';
           this.showSuccessMessage = true;
           this.isSuccess = true;
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+          }, 3000); // 3 giây
         },
         error: (error: any) => {
           this.popupMessage = 'Đổi mật khẩu thất bại.';
           this.showSuccessMessage = true;
           this.isSuccess = false;
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+          }, 3000); // 3 giây
           console.log(error);
         },
       });
