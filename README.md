@@ -1,27 +1,75 @@
-# RealEstateFrontend
+# Website giới thiệu bất động sản
+<a name="top"><a>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.4.
+## Mô tả Project <a name="project"></a>
 
-## Development server
+### Công nghệ sử dụng <a name="use"></a>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Backend: .Net Core Web API       <a href = "https://github.com/pthanhphong1502/Real_estate">(Code)</a>
+- Frontend: Angular
+- Database: SQL Server
 
-## Code scaffolding
+### Tính năng chính <a name="main-feature"></a>
+- Đăng ký, đăng nhập
+- Quên mật khẩu, thay đổi mật khẩu
+- Thêm, sửa, xóa tin đăng bất động sản
+- Tìm kiếm, lọc tin theo nhiều lựa chọn
+- Nạp tiền vào tài khoản bằng Paypal
+- Quản lý tin đăng
+- Đăng lại tin đã hết hạn
+- Thêm, sửa, xóa các cấu hình tin đăng
+- Xem thống kê, báo cáo theo các khoảng thời gian nhất định
+- Thay đổi thông tin cá nhân
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Danh sách các màn hình <a name="screen"></a>
+<p>
+  1. Màn hình chính
+  
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Ban_main.PNG" />
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Chothue_Main.PNG" />
 
-## Build
+  2. Màn hình xem chi tiết tin đăng
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Chitiet1.PNG" />
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Chitiet2.PNG" />
+  
+  3. Màn hình quản lý tin đăng
 
-## Running unit tests
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Quanlytin_All.PNG" />
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Quanlytin_Hethan.PNG" />
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  4. Màn hình đăng tin
 
-## Running end-to-end tests
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Dangtin1.PNG" />
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Dangtin2.PNG" />
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Dangtin3.PNG" />
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Dangtin4.PNG" />
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Dangtin5.PNG" />
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Dangtin6.PNG" />
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+  5. Màn hình đăng lại tin
 
-## Further help
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Danglai.PNG" />
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+  6. Màn hình quản lý tài khoản
+
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Quanlytaikhoan.PNG" />
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Doimk.PNG" />
+
+  7. Màn hình nạp tiền
+
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Naptien.PNG" />
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Thanhtoan.PNG" />
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Thanhtoanthanhcong.PNG" />
+
+  8. Màn hình trang admin
+
+  <img src="https://raw.githubusercontent.com/pthanhphong1502/Image/main/Real_Estate/Dashboard.PNG" />
+  
+</p>
+
+
+
+
+
+
